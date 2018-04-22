@@ -104,7 +104,7 @@ class Chen():
         使用random模块的randint方法
         :return:
         '''
-        print '输出一个0-1之间的随机数:%s' % random.randint(0,1)
+        print '输出一个0-1之间的随机数:%s' % random.randdom(0,1)
         random.
 
     def twelve(self):
