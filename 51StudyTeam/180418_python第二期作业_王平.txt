@@ -1,0 +1,140 @@
+# coding=utf-8
+# 题目，考点, 输出以下结果
+
+list1 = ['Google', 'Runoob', 1997, 2000]
+list2 = [1, 2, 3, 4, 5, 6, 7 ]
+list3 = [1, 2, 3, 3, 4]
+#3、输出list1的第一个值,list2的第2-5个值
+print list1[1]
+
+#4、 使用一个新list（subList）存储list2的第2-5个值
+subList =[]
+i = 1
+while i <= 4:
+    subList.append(list2[i])
+    i = i + 1
+print subList
+
+
+# 5.	将list1的第三个值变成2001,并输出新的list
+# 主要说明list是可变的，这样代码不安全。
+list1[2] = 2001
+newList = list1
+print newList
+
+
+# 6.	删除list3的第三个元素并输出新的list
+list3.pop(2)
+newList3 = list3
+print newList3
+
+# 7.	求list1的长度
+print len(list1)
+
+# 8. 求list4,list5的最大值
+list4 = ['Google', 'Runoob', 'Taobao']
+list5 = [456, 700, 200]
+print max(list4), max(list5)
+
+# 9.	List1+list2的新list6,输出新list6
+list6 = list1 + list2
+print list6
+
+# 10.	将这个元组装换成list
+aTuple = (123, 'Google', 'Runoob', 'Taobao')
+tuple2list = list(aTuple)
+print tuple2list
+
+# 11.	list1的末尾插入’baidu’这个元素
+list1.append('baidu')
+print list1
+
+# 12.	;计算’123在alist中出现的次数
+aList = [123, 'Google', 'Runoob', 'Taobao', 123]
+print aList.count(123)
+
+
+# 13.	计算runoob在list中的索引位置
+print list1.index('Runoob')
+
+# 14.	删除list1中的四二个值
+list1.pop(1)
+print list1
+
+# 15.	将list1倒序输出
+list1.sort(reverse=True)
+print list1
+# 16.	将list2排序
+
+# 17. 输出name所对应的value
+dict = {'Name': 'Runoob', 'Age': 7, 'Class': 'First'}
+print dict['Name']
+
+# 18. Fibonacci series: 斐波纳契数列 # 两个元素的总和确定了下一个数,
+# 写一个程序计算100以内菲波那切数列,并把结果输入在同一列
+
+listFib = [1, 1]
+i = 0
+fibValue = 0
+while fibValue < 100:
+    fibValue =listFib[i] + listFib[i+1]
+    if fibValue > 100:
+        break
+    listFib.append(fibValue)
+    firFib = listFib[i]
+    secFib = listFib[i+1]
+    i = i+1
+
+print listFib
+
+
+# 19.	写一个程序,让用户输入年龄,0-3岁告诉用户是婴儿,3-6岁幼儿,6-12岁少年,12-18青年,18岁以上是成人
+def identity(age):
+    # 判断输入是否整数,这一步判断是比较多余的
+    if age > 0 and age <= 3:
+        return '婴儿'
+    elif age > 3 and age <= 6:
+        return '幼儿'
+    elif age >= 6 and age <= 12:
+        return '少年'
+    elif age > 12 and age <= 18:
+        return '青年'
+    # 这里使用elif而不是用else的原因是，如果使用else ：print ’成人‘，用户输入0，就有问题。
+    # 如果要使用else，就必须考虑在第一个条件，加入0的判断。
+    elif age > 18:
+        return '成人'
+
+age = int(raw_input('please input the age :'))
+print identity(age)
+
+
+# 20.	计算0-100的整数之和
+s = 0
+for i in range(0, 101):
+    s = s + i
+print s
+# 21.	计算并输出0-10的质数,提示,质数:只有1和他本身两个因数,只能被1和他本身整除
+# :param s: 代表范围起始
+# :param e: 代表范围结束
+# :return: s-e的质数序列
+# 里层循环每个数是否能被1和它本身的数整除（循环除2到s-1），如果余数不为0，则为质数
+def primeNum(s, e):
+    primeList = []
+    for num in range(s, e+1):
+        if num == 0 or num == 1:
+            continue
+        if num == 2:
+            primeList.append(num)
+            continue
+        if num > 2:
+            for divisor in range(2, num):
+                if num % divisor == 0:
+                    break
+            else:
+                primeList.append(num)
+    return primeList
+
+print primeNum(1, 30)
+
+
+
