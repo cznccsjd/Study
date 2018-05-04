@@ -1,0 +1,83 @@
+# coding=utf-8
+'''
+子曰：“温故而知新，可以为师矣”，可见复习的重要性。
+有疑问请大群里面吼一声。
+下面开始正文：
+'''
+# 1、python代码块的缩进非常严格，请写出主要的几中缩进，并养成自己的缩进风格。
+
+同一个语句要缩进4行
+
+
+# 2、python注释的使用，并指出各自区别，什么时候用什么样的注释。
+
+不会
+
+# 3、请写出python的标准数据类型，并举例说明
+ 
+1.数字 :int float bool set     2.字符串 string       3.list[]   4.tuple()  5.dict{}
+
+# 4、编写一段代码，如果age 大于等于 18 ，输出结果为 成人
+   
+
+age=int(input('please give your age :'))
+print('your age is :',age)
+if age >= 18 :
+    print('you are a teenager!')
+
+# 5、if语句什么情况下会执行，什么情况下会执行。
+ 条件是true就执行
+不true 不执行
+
+
+
+# 6、请使用for循环编写一段程序，状态值有[0 ,1 ,2, 3]如果status =2，跳出本次循环，进行下一次循环；
+
+ l=[0,1,2,3,4]
+for i in l:
+    if i==2:
+        break
+        print('终止循环')
+    else:
+        print(i)
+        i=i+1
+
+# 如果状态值为0，则终止循环。如果是其他值，则正常循环，并打印“运行正常”。
+
+
+# 7、请使用while循环编写一段程序，如果name='python',password='123456'则打印：登录成功；
+while 1==1:
+    a=input('your name is :')
+    print('your name is :',a)
+    b=input('please enter your password:')
+    if b=='123456':
+        print('login successful!')
+        break
+# 否则登录失败。5次登录机会（不用管超过5次显示什么）。
+# 8、输出格式化的字符串（使用% 或者.format都行），需要格式化的内容- xx，实现以下内容：
+# 我姓名是xx，我年龄是xx，我身高是xx(这里保留两位小数)
+
+name='xiaoxue'
+age='28'
+hight='168'
+print('your name is %s,age is %s hight is %s' %(name,age,hight))
+
+
+
+
+
+# 9、从1-100里面，取出所有偶数放到一个list里面
+
+i=1
+list2 =[]
+while i<=100:
+    i=i+1
+    if i%2==0:
+       a=list2.append(i)
+print(a)
+
+
+# 10、面试题，
+# 1）请问list和tuple有什么区别；list可变,tuple不可变    list[] tuple()
+# 2）python中哪些是可变对象，哪些是不可变对象。
+可变list dict 不可变tuple
