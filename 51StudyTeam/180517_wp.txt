@@ -1,0 +1,54 @@
+# -*- coding: utf-8 -*-
+import random
+
+
+# 实现3个骰子，买大买小的操作。
+def bocai():
+    """
+    请注意菠菜说明：
+    首先，请输入参与菠菜的骰子个数，1、2 或者3
+    1、如果选择1个骰子，则[1,2,3]为小，[4,5,6]为大
+    2、如果选择2个骰子，则[1~6]为小，[7~12]为大
+    3、如果选择3个骰子，则[1~9]为小，[10~18]为大
+    enjoy ！
+    """
+    while True:
+        try:
+            num_input = int(raw_input('请输入参与菠菜的骰子个数，1、2 或者3:'))
+            num_change = int(num_input)
+            if num_change < 0 or num_change > 3:
+                raise ValueError('请认真输入一个1~3的整数！')
+            break
+        except ValueError:
+            print '请输入一个1~3的整数'
+
+    while True:
+        result = raw_input("请输入要押注的大小，请输入'大'或者'小':")
+        if result == '大' or result == '小':
+            break
+        else:
+            continue
+
+    number = random.randint(1, 6)
+
+    if num_change == 1:
+        if number >= 1 and number <= 3:
+            print '骰子的点数是{}，结果是小'.format(number)
+        else:
+            print '骰子的点数是{}，结果是大'.format(number)
+
+    elif num_change == 2:
+        if number >= 1 and number <= 6:
+            print '骰子的点数是{}，结果是小'.format(number)
+        else:
+            print '骰子的点数是{}，结果是大'.format(number)
+
+    elif num_change == 3:
+        if number >= 1 and number <= 9:
+            print '骰子的点数是{}，结果是小'.format(number)
+        else:
+            print '骰子的点数是{}，结果是大'.format(number)
+
+
+if __name__ == '__main__':
+    bocai()

@@ -1,0 +1,49 @@
+#coding=utf-8
+import random
+
+def roll_dice(numbers=3, points=None):
+    if points is None:
+        points = []
+
+    print('----- 摇骰子 -----')
+    while numbers > 0:
+        point = random.randrange(1, 7)
+        points.append(point)
+        numbers -= 1
+    return points
+def roll_result(total):
+    is_big = 11 <= total <= 18
+    is_small = 3 <= total <= 10
+    if is_big:
+        return "big"
+    elif is_small:
+        return "small"
+def start_game():
+    money = 1000
+    while money > 0:
+        print('----- 游戏开始 -----')
+        choices = ['big', 'small']
+        your_choice = input("请下注， big or small")
+        your_bet = input("下注金额：")
+        if your_choice in choices:
+            if your_bet.isdigit():
+                points = roll_dice()
+                total = sum(points)
+                you_win = your_choice == roll_result(total)
+                if you_win:
+                    print("骰子点数", points, total)
+                    money += int(your_bet)
+                    print("恭喜， 你赢了%s元， 你现在的本金%s 元" % (your_bet, money))
+                else:
+                    print("骰子点数", points, total)
+                    money -= int(your_bet)
+                    print("很遗憾， 你输了%s元， 你现在的本金%s 元" % (your_bet, money))
+
+            else:
+                print('格式有误，请重新输入')
+        else:
+            print('格式有误，请重新输入')
+    else:
+        print("game over")
+
+start_game()
