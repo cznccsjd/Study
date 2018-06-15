@@ -36,4 +36,4 @@ def download(url = 'http://www', process = firstLast):
         process(retval)
 
 if __name__ == '__main__':
-    download("crm.51talk.com")
+    download()
