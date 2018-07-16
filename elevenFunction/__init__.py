@@ -12,5 +12,6 @@ hanshushi.py        11.7 函数式编程
 closure.py        11.8.4 全局变量和局部变量--闭包
 closureAdv.py       11.8.4 全局变量和局部变量--闭包，给高级别用的，追踪闭包变量
 funclog.py       11.8.4 高级闭包和装饰器的例子
+generator.py    11.10   生成器
 """
 

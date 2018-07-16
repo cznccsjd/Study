@@ -1,4 +1,4 @@
-#coding;utf-8
+#coding:utf-8
 """
 11.3.6 deco.py，使用闭包和装饰器的简单例子；接下来是稍微高级点的例子，来演示闭包的真正威力；
 应用程序“logs”函数调用。用户选择是要在函数调用之前或者之后，把函数调用写入日志。如果选择贴日志，执行时间也会显示出来。
@@ -8,7 +8,7 @@
 from time import time
 
 def logged(when):
-    def log(f, args, kargs):
+    def log(f, *args, **kargs):
         print '''Called:
 functions:%s
 agrs:%r
@@ -28,7 +28,7 @@ kargs:%r''' % (f, args, kargs)
             finally:
                 log(f, *args, **kargs)
                 print "time delta:%s" % (time()-now)
-        return wrapper
+        return wrapped
 
     try:
         return {"pre": pre_logged,
