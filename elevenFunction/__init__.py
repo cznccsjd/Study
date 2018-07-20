@@ -2,6 +2,7 @@
 """
 easyMath.py     11.1 算数游戏       可以参考是否重复运行一遍的代码
 deco.py     例11.2 使用函数装饰器的例子
+decoAndClousure.py  闭包和装饰器深入理解写的例子
 numConv.py      例11.3   传递和调用（内建）函数
 grabWeb.py      例11.4 抓取web页面
 nonKey.py   11.6.1 非关键字可变长参数（元组）
