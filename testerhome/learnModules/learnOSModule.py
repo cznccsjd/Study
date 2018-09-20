@@ -65,3 +65,24 @@ for root, dirs, files in os.walk('/logs/nginxlogs'):
 
 
 # • 搜索目录/home/tools/下所有已test开头，py结尾的文件(包括子目录的), 把文件全路径输出到一个列表里面打印出来
+#!/usr/bin/evn python
+#coding:utf-8
+"""
+实现功能：
+1、搜索目录/tmp/jlz下所有以test打头，py结尾的文件（包括子目录的）；
+2、把文件全路径输出到一个列表中打印出来；
+"""
+import os
+
+list = []
+#os.listdir()返回指定目录下所有的文件和目录名，不包括子目录
+#files = os.listdir('/tmp/jlz')
+#print files
+
+#os.walk()包括子目录
+for root, dirs, files in os.walk('/tmp/jlz'):
+    for file in files:
+        if (file[:4] == 'test' and file[-2:] == 'py'):
+           ab = os.path.join(root,file)
+           list.append(ab)
+print '/tmp/jlz目录下以test打头以py结尾的文件：\n:',list
