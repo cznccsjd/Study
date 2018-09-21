@@ -1,0 +1,10 @@
+本文件夹为testerhome社区学习Python的笔记代码
+
+learnCommandsModule.py      学习commands/subprocess模块
+learnFileModule.py      学习file模块
+learnJsonModule.py
+learnOSModule.py
+learnRadomModule.py
+learnReModules.py
+learnSysModule.py
+learnTimeModule.py      学习time/datetime模块；  包含练习题文件 log4j
