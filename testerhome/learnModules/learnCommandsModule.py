@@ -41,7 +41,7 @@ import subprocess
 2. 通过python启动一个windows应用程序
 3. 在Linux下启动tomcat进程，并判断tomcat启动是否成功
 """
-import subprocess,time
+import subprocess,time,commands
 def one():
     """
     通过windows 下ping命令， 得出www.testerhome.com 的服务器IP 地址
@@ -67,13 +67,21 @@ def two():
     # subprocess.call(r"taskkill /f /t /im Foxmail.exe")      #关闭进程，在cmd可以直接运行成功，Python中运行不成功
 
 def three():
-    # subprocess.call()
-    #先判断nginx的进程是否存在，如果存在，kill掉
-    # result = subprocess.call("ps -aux|grep 'nginx'")
-    result = subprocess.Popen("ps -aux|grep 'nginx'",shell=True)
-    print result
+    """
+    判断nignx进程是否存在，如果存在，kill它
+    :return: 
+    """
+    status, pids = commands.getstatusoutput("ps aux|grep -w 'nginx'|grep -v grep|awk '{print $2}'")
+    while status == 0:
+        if len(pids) != 0:
+            pids = pids.split(" ")
+            for pid in pids:
+                status = commands.getstatusoutput("kill " + pid)
+        else:
+            print 'nginx的进程不存在了'
+        break
 
 if __name__ == '__main__':
-    one()
+    # one()
     # two()
-    # three()
+    three()
