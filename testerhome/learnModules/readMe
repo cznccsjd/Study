@@ -3,6 +3,7 @@
 learnCommandsModule.py      学习commands/subprocess模块
 learnFileModule.py      学习file模块
 learnJsonModule.py
+learnLoggingModule.py       学习logging模块，包含生成的log文件：test.log
 learnOSModule.py
 learnRadomModule.py
 learnReModules.py
