@@ -112,3 +112,75 @@ import random
 # opener也可以添加header，使用addheaders = [('key','value')]
 # opener = urllib.request.build_opener(http_proxy)
 # opener.addheaders = [('User-Agent','Mozilla/5.0')]
+
+
+
+##########  异常处理
+# URLError，是urllib的异常类
+import urllib.error
+
+# url故意写成htt，可以得到一个错误
+# urllib.request.urlopen('htt://www.baidu.com')   #urllib.error.URLError: <urlopen error unknown url type: htt>
+
+# 捕获异常，不让程序崩溃
+# try:
+#     urllib.request.urlopen('htt://www.baidu.com')
+# except urllib.error.URLError as e:
+#     print(e.reason)
+
+# 捕获域名到期异常
+# try:
+#     urllib.request.urlopen('http://www.imooclimooc2.com')
+# except urllib.error.URLError as e:
+#     print(e.reason)
+
+# HTTPError 访问不存在 404
+# urllib.request.urlopen('http://www.imooc.com/cheshen.html')
+# 捕获异常
+# try:
+#     urllib.request.urlopen('http://www.imooc.com/cheshen.html')
+# except urllib.error.HTTPError as e:
+#     print(e.reason)
+#     print(e.code)
+
+
+
+
+##########  Beautiful Soup
+# Beautiful Soup: Python 的第三方插件用来提取 xml 和 HTML 中的数据，官网地址 https://www.crummy.com/software/BeautifulSoup/
+# 实战，获取imooc首页推荐的实战课，这几个图片xpath路径最后都为：<h3 class="course-card-name">xxxx</h3>，其实这么简单的写，还真的是有问题，会获取所有图片，不仅仅是实战课中的
+
+# 导包
+from bs4 import BeautifulSoup
+
+# 创建一个request对象
+# req = urllib.request.Request('https://www.imooc.com/')
+
+# 使用Request对象发送请求
+# res = urllib.request.urlopen(req)
+# response = res.read()
+# print('response返回结果:\n', response.decode('utf-8'))
+
+# soup = BeautifulSoup(response,'html.parser')
+
+# course_names = soup.find_all('h3', {'class':'course-card-name'})
+# print('最终筛选结果：\n',course_names)
+# print('lens of result:\n', len(course_names))
+
+
+#上面返回了71个结果，显然包含很多不是实战推荐的课程，继续找页面上一级路径，再进行搜索，缩小检索范围
+req = urllib.request.Request('https://www.imooc.com/')
+res = urllib.request.urlopen(req)
+response = res.read()
+
+soup = BeautifulSoup(response,'html.parser')
+# 先获取找到的div
+course_div = soup.find('div',{'class':'clearfix types-content'})
+# 再从div里获取想要的内容,注意，AttributeError: ResultSet object has no attribute 'find_all'. You're probably treating a list of items like a single item. Did you call find_all() when you meant to call find()?
+course_names = course_div.find_all('h3', {'class':'course-card-name'})
+print('增加div筛选后，结果：\n',course_names)
+print('这次结果长度为：\n', len(course_names))
+
+# 将结果中多余的h3 class="course-card-name" 字样去除
+for course_name in course_names:
+    print(course_name.text)
