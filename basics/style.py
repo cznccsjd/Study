@@ -10,7 +10,7 @@
     （3）模块导入
     import sys
     import os
-    （4）函数定义
+    （4）变量定义
     debug = True
     （5）类定义
     class FooClass (object):
