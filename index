@@ -1,0 +1,12 @@
+## 索引文件
+目录下的东西太多了，在这里说明哪个文件夹是做什么的
+
+[Openpyxl](./Openpyxl)：Openpyxl模块，操作Excel模块
+
+[others](./others)：存放零散的脚本
+
+[Request](./Request)：Requests模块，接口测试
+
+[Spider](./Spider)：爬虫相关学习文档
+
+[testerhome](./testerhome)：Testerhome社区相关学习文档

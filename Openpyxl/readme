@@ -12,3 +12,4 @@ usingFiltersandSorts.py     使用过滤器和排序
 worksheetTables.py      工作表表格
 validatingCells.py      验证单元格
 copy.py     数据拷贝（自己查找资料写的）
+testOpenpyxl.py    openpyxl快速上手学习文件
