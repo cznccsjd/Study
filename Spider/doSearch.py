@@ -27,7 +27,7 @@ class DoSearch():
         dict = {}
         dict['date'] = 5
         dict['headers'] = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'}
-        dict['sleep'] = 3
+        dict['sleep'] = 8
         # print(dict)
         return dict
 
@@ -37,12 +37,12 @@ class DoSearch():
         后续需要拆分出多个方法
         :return:
         '''
-        url = 'https://www.douban.com/group/beijingzufang/'
+        # url = 'https://www.douban.com/group/beijingzufang/'       #调试用的url
         config = DoSearch().config()
 
-        if url in self.douB.keys():
+        # if url in self.douB.keys():         #配合调试url使用的
         #打开单个组，获取该组下所有有价值的单条url
-        # for url in self.douB.keys():
+        for url in self.douB.keys():
             url = url + 'discussion'
             # print(url)
             # 定义一个新的字典，存放单个组内，筛选出来的结果
