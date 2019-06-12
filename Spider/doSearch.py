@@ -7,6 +7,8 @@ from Spider import douban
 import requests
 from bs4 import BeautifulSoup
 import time, datetime
+from openpyxl import Workbook
+import os
 
 class DoSearch():
     def __init__(self):
@@ -25,16 +27,19 @@ class DoSearch():
         dict = {}
         dict['date'] = 5
         dict['headers'] = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'}
-        dict['sleep'] = 10
+        dict['sleep'] = 3
         # print(dict)
         return dict
 
     def doDouBan(self):
         '''
         从douban.py获取url，执行爬虫操作
+        后续需要拆分出多个方法
         :return:
         '''
         url = 'https://www.douban.com/group/beijingzufang/'
+        config = DoSearch().config()
+
         if url in self.douB.keys():
         #打开单个组，获取该组下所有有价值的单条url
         # for url in self.douB.keys():
@@ -45,24 +50,25 @@ class DoSearch():
 
             for num in range (0,10000,25):
                 data = {'start': num}
-                header = DoSearch().config()['headers']
+                header = config['headers']
                 cookie = self.configDouban['cookie']
                 res = requests.get(url,data, headers = header, cookies = cookie)
                 # 增加request间隔时间，防止被封IP
-                time.sleep(DoSearch().config()['sleep'])
+                sleeptime = config['sleep']
+                time.sleep(sleeptime)
                 ########### 需要新增功能，如果帖子最新回复时间已经是5天前的了，整个num也不用循环了，直接跳出。所以需要一个新的方法，并且返回值
                 soup = BeautifulSoup(res.text,"lxml")
                 titles = soup.select('td.title > a')
                 links = soup.select('td.title > a')
                 times = soup.select('td.time')
 
-                for title, link, time in zip(titles, links, times):
+                for title, link, atime in zip(titles, links, times):
                     title = title.text
                     link = link.get('href')
-                    time = time.text
-                    preTime = DoSearch().time()
+                    atime = atime.text
+                    preTime = DoSearch().ftime()
                     # 当前这条数据的时间在5天前，就不要了，并且终止后面的循环
-                    if time < preTime:
+                    if atime < preTime:
                         break
 
                     # title中包含不需要地区的数据，直接去除，符合条件的可以存到Excel文件中
@@ -78,8 +84,47 @@ class DoSearch():
                         else:
                             break
 
+        print(result)
 
-    def time(self):
+    def excel(self,dict):
+        '''
+        数据存储到Excel中
+        :return:
+        '''
+        wb = Workbook()
+        ws = wb.active
+        dir = os.getcwd()
+        filetime = time.strftime('_%Y%m%d_%H%M%S', time.localtime())
+        file = 'douban' + filetime + '.xlsx'
+
+        # 绘制Excel表格
+        ws.cell(row=1, column=1).value = '标题'
+        ws.cell(row=1, column=2).value = 'URL'
+        ws.cell(row=1, column=3).value = '价格'
+        ws.cell(row=1, column=4).value = '地区'
+        ws.cell(row=1, column=5).value = '户型'
+        ws.cell(row=1, column=6).value = 'TEL'
+        ws.cell(row=1, column=7).value = '微信'
+
+        # 把传入的dict转换成list
+        values = dict
+        # 往表格中输入数值
+        ws_max_row = ws.max_row
+        ws_max_col = ws.max_column
+
+        for col in range (ws_max_col):
+            ws.cell(row=ws_max_row+1, column=col).value = values[col]
+
+
+
+        print('当前表格最大的行:\n', ws_max_row)
+
+        # 保存Excel（可以覆盖保存）
+        # wb.save(file)
+
+
+
+    def ftime(self):
         # 获取指定x天前时间
         day = DoSearch().config()['date']
         preday = (datetime.datetime.now() - datetime.timedelta(days=day)).strftime("%m-%d %H:%M")
@@ -87,5 +132,6 @@ class DoSearch():
 
 if __name__ == '__main__':
     DoSearch().doDouBan()
-    # DoSearch().time()
+    # DoSearch().ftime()
     # DoSearch().config()
+    # DoSearch().excel()

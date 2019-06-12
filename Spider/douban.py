@@ -23,7 +23,7 @@ class Douban():
         dict = {}
         dict['url1'] = 'https://www.douban.com/group/search'
         dict['headers'] = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'}
-        dict['sleep'] = 10
+        dict['sleep'] = 5
         # 浏览器拷贝过来的cookie是str，需要转换为dict
         cookie = 'bid=n4knZ-I4N7k; __utmc=30149280; ct=y; ll="108288"; _pk_ref.100001.8cb4=%5B%22%22%2C%22%22%2C1560237015%2C%22https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3D98_AscV-k0modJWTChFjjwhOXLp6KfrVyC641njNilm%26wd%3D%26eqid%3Daf1567b90000368a000000025cff53d0%22%5D; _pk_ses.100001.8cb4=*; __utma=30149280.1704380107.1560230238.1560237021.1560237022.4; __utmz=30149280.1560237022.4.2.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmt=1; dbcl2="180074916:nif7JgNsI3I"; ck=4nDJ; _pk_id.100001.8cb4=5164272b35769681.1560230238.3.1560238077.1560234397.; push_noty_num=0; push_doumail_num=0; __utmv=30149280.18007; __utmb=30149280.9.9.1560238079303'
         if type(cookie) == str:
@@ -62,8 +62,8 @@ class Douban():
             url, data = Douban().searchUrl(num)
             rSearch = requests.get(url, data, headers = config['headers'], cookies = config['cookie'])
             # 新增一个打印，调试时判断请求是否出现问题，比如被豆瓣封锁IP了
-            print(rSearch)
-            print(rSearch.text)
+            # print(rSearch)
+            # print(rSearch.text)
             # 增加请求间歇时间，防止被封IP
             sleep = config['sleep']
             time.sleep(sleep)
