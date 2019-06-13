@@ -1,2 +1,4 @@
 # 文件相关操作
 [file.py](./file.py)：文件操作详细文件
+
+[config.py](./config.py)：操作config.ini文件
