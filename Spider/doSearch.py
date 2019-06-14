@@ -15,9 +15,10 @@ class DoSearch():
         #本脚本开始执行时间，方便需要时查看执行效率
         # doBeginTime = time.time()
         # print('Begin Time:', doBeginTime)
-        self.douB = douban.Douban().search()
-        self.configDouban = douban.Douban().config()
-        pass
+        engine = douban.Douban()
+        + = engine.search()
+        self.configDouban = engine.config()
+        # pass
 
     def config(self):
         '''
@@ -51,8 +52,8 @@ class DoSearch():
             for num in range (0,10000,25):
                 data = {'start': num}
                 header = config['headers']
-                cookie = self.configDouban['cookie']
-                res = requests.get(url,data, headers = header, cookies = cookie)
+                cookiea = self.configDouban['cookie']
+                res = requests.get(url,data, headers = header, cookies = cookiea)
                 # 增加request间隔时间，防止被封IP
                 sleeptime = config['sleep']
                 time.sleep(sleeptime)
