@@ -3,12 +3,10 @@
 执行爬虫文件
 '''
 
+import time, datetime, requests, os
 from Spider import douban
-import requests
 from bs4 import BeautifulSoup
-import time, datetime
 from openpyxl import Workbook
-import os
 
 class DoSearch():
     def __init__(self):
@@ -16,10 +14,10 @@ class DoSearch():
         # doBeginTime = time.time()
         # print('Begin Time:', doBeginTime)
         engine = douban.Douban()
-        + = engine.search()
-        self.configDouban = engine.config()
-        # pass
+        self.douB = engine.search()
+        self.configDouban = engine.config
 
+    @property
     def config(self):
         '''
         后续参数化
@@ -28,7 +26,7 @@ class DoSearch():
         dict = {}
         dict['date'] = 5
         dict['headers'] = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'}
-        dict['sleep'] = 8
+        dict['sleep'] = 3
         # print(dict)
         return dict
 
@@ -39,7 +37,7 @@ class DoSearch():
         :return:
         '''
         # url = 'https://www.douban.com/group/beijingzufang/'       #调试用的url
-        config = DoSearch().config()
+        config = self.config
 
         # if url in self.douB.keys():         #配合调试url使用的
         #打开单个组，获取该组下所有有价值的单条url
@@ -67,23 +65,22 @@ class DoSearch():
                     title = title.text
                     link = link.get('href')
                     atime = atime.text
-                    preTime = DoSearch().ftime()
-                    # 当前这条数据的时间在5天前，就不要了，并且终止后面的循环
+                    preTime = self.ftime
+                    # 当前这条数据的时间在5天前，就不要了，并且终止后面的循环      ###################啊啊啊啊，这里肯定有bug
                     if atime < preTime:
                         break
 
                     # title中包含不需要地区的数据，直接去除，符合条件的可以存到Excel文件中
                     strNos = self.configDouban['notArea']
+                    i = 0
                     for strno in strNos:
                         if strno in title:
                             break
                         else:
-                            num += 1
-                        # 符合条件的存到Excel文件中
-                        if num == len(strNos):
-                            result[link] = title
-                        else:
-                            break
+                            i += 1
+                    # 符合条件的存到Excel文件中
+                    if i == len(strNos):
+                        result[link] = title
 
         print(result)
 
@@ -124,10 +121,11 @@ class DoSearch():
         # wb.save(file)
 
 
-
+    @property
     def ftime(self):
         # 获取指定x天前时间
-        day = DoSearch().config()['date']
+        config = self.config
+        day = config['date']
         preday = (datetime.datetime.now() - datetime.timedelta(days=day)).strftime("%m-%d %H:%M")
         return preday
 
