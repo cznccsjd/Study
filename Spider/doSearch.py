@@ -66,7 +66,8 @@ class DoSearch():
                     link = link.get('href')
                     atime = atime.text
                     preTime = self.ftime
-                    # 当前这条数据的时间在5天前，就不要了，并且终止后面的循环      ###################啊啊啊啊，这里肯定有bug
+
+                    # 当前这条数据的时间在5天前，就不要了，并且终止后面的循环
                     if atime < preTime:
                         break
 
@@ -81,6 +82,10 @@ class DoSearch():
                     # 符合条件的存到Excel文件中
                     if i == len(strNos):
                         result[link] = title
+
+                else:
+                    continue
+                break
 
         print(result)
 
