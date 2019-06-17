@@ -46,12 +46,23 @@ class DoSearch():
             # print(url)
             # 定义一个新的字典，存放单个组内，筛选出来的结果
             result = {}
+            temprusult = {} #临时存放
 
-            for num in range (0,10000,25):
+            for num in range (0,20000,25):
                 data = {'start': num}
                 header = config['headers']
                 cookiea = self.configDouban['cookie']
-                res = requests.get(url,data, headers = header, cookies = cookiea)
+                errorNum = 0
+
+                # 关闭多余的连接
+                s = requests.sessions.session()
+                s.keep_alive = False
+                try:
+                    res = requests.get(url,data, headers = header, cookies = cookiea,timeout=10)
+                except Exception as e:
+                    errorNum += 1
+                    print("第%d次报错，此时url：%s,原因：%s" %(errorNum,url,e))
+                    continue
                 # 增加request间隔时间，防止被封IP
                 sleeptime = config['sleep']
                 time.sleep(sleeptime)
@@ -71,24 +82,45 @@ class DoSearch():
                     if atime < preTime:
                         break
 
-                    # title中包含不需要地区的数据，直接去除，符合条件的可以存到Excel文件中
-                    strNos = self.configDouban['notArea']
-                    i = 0
-                    for strno in strNos:
-                        if strno in title:
-                            break
-                        else:
-                            i += 1
-                    # 符合条件的存到Excel文件中
-                    if i == len(strNos):
-                        result[link] = title
+                    # title中包含不需要地区的数据，直接去除
+                    # strNos = self.configDouban['notArea']
+                    # i = 0
+                    # for strno in strNos:
+                    #     if strno in title:
+                    #         break
+                    #     else:
+                    #         i += 1
+                    #
+                    # if i == len(strNos):
+                    #     val = [title,atime]
+                    #     result[link] = val
+                    # 保留在指定区域的数据
+                    strareas = self.configDouban['Area']
+                    for strarea in strareas:
+                        if strarea in title:
+                            val = [title,atime]
+                            result[link] = val
+
+
 
                 else:
                     continue
                 break
 
-        print(result)
 
+
+
+        print('单条数据获取成功:',result)
+
+        self.excel(result)
+
+
+
+        # 写到excl
+        for line in len(result):
+            self.excel()
+
+    @property
     def excel(self,dict):
         '''
         数据存储到Excel中
@@ -108,23 +140,27 @@ class DoSearch():
         ws.cell(row=1, column=5).value = '户型'
         ws.cell(row=1, column=6).value = 'TEL'
         ws.cell(row=1, column=7).value = '微信'
+        ws.cell(row=1, column=8).value = '最后更新时间'
+        ws.cell(row=1, column=9).value = '来源'
 
-        # 把传入的dict转换成list
-        values = dict
-        # 往表格中输入数值
         ws_max_row = ws.max_row
         ws_max_col = ws.max_column
 
-        for col in range (ws_max_col):
-            ws.cell(row=ws_max_row+1, column=col).value = values[col]
+        lines = len(dict)
 
+        for line in lines:
 
+            for dic in dict:
+                # 往表格中输入数值
+                ws.cell(row=line,column=1).value = dict[dic][0]
+                ws.cell(row=line,column=8).value = dict[dic][1]
+                ws.cell(row=line,column=2).value = dic
 
-        print('当前表格最大的行:\n', ws_max_row)
+                print('单条数据写入成功\n')
 
         # 保存Excel（可以覆盖保存）
-        # wb.save(file)
-
+        wb.save(file)
+        print('最终数据写入成功')
 
     @property
     def ftime(self):

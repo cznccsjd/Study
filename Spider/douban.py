@@ -42,6 +42,7 @@ class Douban():
 
         dictC['city'] = '北京'
         dictC['notArea'] = ['朝阳','望京','丰台','通州','大兴','燕郊','顺义','CBD','芍药居','惠新西街南口','双井','八通','国贸','宋家庄','酒仙桥','十里堡','双桥','潘家园','褡裢坡','石景山','劲松']
+        dictC['Area'] = ['回龙观','龙泽','霍营','平西府','育新','育知路','西三旗','上地','清河','西二旗']
         return dictC
 
 
@@ -81,6 +82,7 @@ class Douban():
 
                 if ret:
                     urls[link] = ret      #豆瓣租房小组的组名可能有重复，用来做dict的value；小组的url肯定是唯一的，用来做dict的key
+        print('小组url收集成功\n')
         return urls
 
     def searchUrl(self,num=0):
@@ -103,6 +105,7 @@ class Douban():
         conf = self.config
         str = conf['city']
         strNos = conf['notArea']
+        strArea = conf['Area']
 
         while(str in title):
             num = 0
