@@ -110,7 +110,7 @@ class DoSearch():
 
 
 
-        print('单条数据获取成功:',result)
+        print('可以写入的数据获取成功:',result)
 
         wb = Workbook()
         ws = wb.active
@@ -132,14 +132,15 @@ class DoSearch():
         ws_max_row = ws.max_row
         ws_max_col = ws.max_column
 
-        lines = len(dict)
+        lines = len(result)
 
-        for line in lines:
+        for line in range (2, lines+2):
 
-            for dic in dict:
+            for dic in result:
+                print('值验证下:\n',result[dic][0],result[dic][1])
                 # 往表格中输入数值
-                ws.cell(row=line, column=1).value = dict[dic][0]
-                ws.cell(row=line, column=8).value = dict[dic][1]
+                ws.cell(row=line, column=1).value = result[dic][0]
+                ws.cell(row=line, column=8).value = result[dic][1]
                 ws.cell(row=line, column=2).value = dic
 
                 print('单条数据写入成功\n')
