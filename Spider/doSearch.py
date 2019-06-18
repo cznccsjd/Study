@@ -48,7 +48,7 @@ class DoSearch():
             result = {}
             temprusult = {} #临时存放
 
-            for num in range (0,20000,25):
+            for num in range (0,200,25):
                 data = {'start': num}
                 header = config['headers']
                 cookiea = self.configDouban['cookie']
@@ -112,13 +112,45 @@ class DoSearch():
 
         print('单条数据获取成功:',result)
 
-        self.excel(result)
+        wb = Workbook()
+        ws = wb.active
+        dir = os.getcwd()
+        filetime = time.strftime('_%Y%m%d_%H%M%S', time.localtime())
+        file = 'douban' + filetime + '.xlsx'
+
+        # 绘制Excel表格
+        ws.cell(row=1, column=1).value = '标题'
+        ws.cell(row=1, column=2).value = 'URL'
+        ws.cell(row=1, column=3).value = '价格'
+        ws.cell(row=1, column=4).value = '地区'
+        ws.cell(row=1, column=5).value = '户型'
+        ws.cell(row=1, column=6).value = 'TEL'
+        ws.cell(row=1, column=7).value = '微信'
+        ws.cell(row=1, column=8).value = '最后更新时间'
+        ws.cell(row=1, column=9).value = '来源'
+
+        ws_max_row = ws.max_row
+        ws_max_col = ws.max_column
+
+        lines = len(dict)
+
+        for line in lines:
+
+            for dic in dict:
+                # 往表格中输入数值
+                ws.cell(row=line, column=1).value = dict[dic][0]
+                ws.cell(row=line, column=8).value = dict[dic][1]
+                ws.cell(row=line, column=2).value = dic
+
+                print('单条数据写入成功\n')
+
+        # 保存Excel（可以覆盖保存）
+        wb.save(file)
+        print('最终数据写入成功')
 
 
 
-        # 写到excl
-        for line in len(result):
-            self.excel()
+
 
     @property
     def excel(self,dict):
