@@ -47,17 +47,17 @@ class DoSearch():
         ws.cell(row=1, column=2).value = 'URL'
         ws.cell(row=1, column=3).value = '价格'
         ws.cell(row=1, column=4).value = '地区'
-        ws.cell(row=1, column=9).value = '户型'
-        ws.cell(row=1, column=8).value = 'TEL'
-        ws.cell(row=1, column=7).value = '微信'
         ws.cell(row=1, column=5).value = '最后更新时间'
         ws.cell(row=1, column=6).value = '来源'
+        ws.cell(row=1, column=7).value = '微信'
+        ws.cell(row=1, column=8).value = 'TEL'
+        ws.cell(row=1, column=9).value = '户型'
 
         #打开单个组，获取该组下所有有价值的单条url
         for url in self.douB.keys():
             urlnew = url + 'discussion'
 
-            for num in range (0,20000,25):
+            for num in range (0,2000,25):
                 data = {'start': num}
                 header = config['headers']
                 cookiea = self.configDouban['cookie']
