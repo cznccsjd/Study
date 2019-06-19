@@ -138,7 +138,7 @@ class DoSearch():
                             ws_max_row = ws.max_row
                             ws_max_col = ws.max_column
 
-                            ws.cell(row=ws_max_row+1, column=1).value = title
+                            ws.cell(row=ws_max_row+1, column=1).value = title.strip()
                             ws.cell(row=ws_max_row+1, column=8).value = atime
                             ws.cell(row=ws_max_row+1, column=2).value = link
 
