@@ -39,6 +39,37 @@ class DoSearch():
         # url = 'https://www.douban.com/group/beijingzufang/'       #调试用的url
         config = self.config
 
+        # excel相关操作
+        wb = Workbook()
+        ws = wb.active
+        dir = os.getcwd()
+        filetime = time.strftime('_%Y%m%d_%H%M%S', time.localtime())
+        file = 'douban' + filetime + '.xlsx'
+
+        # 绘制Excel表格
+        ws.cell(row=1, column=1).value = '标题'
+        ws.cell(row=1, column=2).value = 'URL'
+        ws.cell(row=1, column=3).value = '价格'
+        ws.cell(row=1, column=4).value = '地区'
+        ws.cell(row=1, column=5).value = '户型'
+        ws.cell(row=1, column=6).value = 'TEL'
+        ws.cell(row=1, column=7).value = '微信'
+        ws.cell(row=1, column=8).value = '最后更新时间'
+        ws.cell(row=1, column=9).value = '来源'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         # if url in self.douB.keys():         #配合调试url使用的
         #打开单个组，获取该组下所有有价值的单条url
         for url in self.douB.keys():
@@ -98,8 +129,42 @@ class DoSearch():
                     strareas = self.configDouban['Area']
                     for strarea in strareas:
                         if strarea in title:
-                            val = [title,atime]
-                            result[link] = val
+                            # val = [title,atime]
+                            # result[link] = val
+
+
+
+
+                            ws_max_row = ws.max_row
+                            ws_max_col = ws.max_column
+
+                            ws.cell(row=ws_max_row+1, column=1).value = title
+                            ws.cell(row=ws_max_row+1, column=8).value = atime
+                            ws.cell(row=ws_max_row+1, column=2).value = link
+
+
+
+                            print('单条数据写入成功\n')
+
+                            break
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -107,47 +172,16 @@ class DoSearch():
                     continue
                 break
 
-
-
-
-        print('可以写入的数据获取成功:',result)
-
-        wb = Workbook()
-        ws = wb.active
-        dir = os.getcwd()
-        filetime = time.strftime('_%Y%m%d_%H%M%S', time.localtime())
-        file = 'douban' + filetime + '.xlsx'
-
-        # 绘制Excel表格
-        ws.cell(row=1, column=1).value = '标题'
-        ws.cell(row=1, column=2).value = 'URL'
-        ws.cell(row=1, column=3).value = '价格'
-        ws.cell(row=1, column=4).value = '地区'
-        ws.cell(row=1, column=5).value = '户型'
-        ws.cell(row=1, column=6).value = 'TEL'
-        ws.cell(row=1, column=7).value = '微信'
-        ws.cell(row=1, column=8).value = '最后更新时间'
-        ws.cell(row=1, column=9).value = '来源'
-
-        ws_max_row = ws.max_row
-        ws_max_col = ws.max_column
-
-        lines = len(result)
-
-        for line in range (2, lines+2):
-
-            for dic in result:
-                print('值验证下:\n',result[dic][0],result[dic][1])
-                # 往表格中输入数值
-                ws.cell(row=line, column=1).value = result[dic][0]
-                ws.cell(row=line, column=8).value = result[dic][1]
-                ws.cell(row=line, column=2).value = dic
-
-                print('单条数据写入成功\n')
-
         # 保存Excel（可以覆盖保存）
         wb.save(file)
         print('最终数据写入成功')
+
+
+
+
+
+
+
 
 
 
