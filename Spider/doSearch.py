@@ -2,7 +2,6 @@
 '''
 执行爬虫文件
 '''
-
 import time, datetime, requests, os
 from Spider import douban
 from bs4 import BeautifulSoup
@@ -11,8 +10,7 @@ from openpyxl import Workbook
 class DoSearch():
     def __init__(self):
         #本脚本开始执行时间，方便需要时查看执行效率
-        # doBeginTime = time.time()
-        # print('Begin Time:', doBeginTime)
+        print('开跑:', time.strftime('%H:%M:%S',time.localtime()))
         engine = douban.Douban()
         self.douB = engine.search()
         self.configDouban = engine.config
@@ -26,8 +24,7 @@ class DoSearch():
         dict = {}
         dict['date'] = 5
         dict['headers'] = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'}
-        dict['sleep'] = 3
-        # print(dict)
+        dict['sleep'] = 2
         return dict
 
     def doDouBan(self):
@@ -36,8 +33,8 @@ class DoSearch():
         后续需要拆分出多个方法
         :return:
         '''
-        # url = 'https://www.douban.com/group/beijingzufang/'       #调试用的url
         config = self.config
+        errorNum = 0
 
         # excel相关操作
         wb = Workbook()
@@ -45,59 +42,38 @@ class DoSearch():
         dir = os.getcwd()
         filetime = time.strftime('_%Y%m%d_%H%M%S', time.localtime())
         file = 'douban' + filetime + '.xlsx'
-
         # 绘制Excel表格
         ws.cell(row=1, column=1).value = '标题'
         ws.cell(row=1, column=2).value = 'URL'
         ws.cell(row=1, column=3).value = '价格'
         ws.cell(row=1, column=4).value = '地区'
-        ws.cell(row=1, column=5).value = '户型'
-        ws.cell(row=1, column=6).value = 'TEL'
+        ws.cell(row=1, column=9).value = '户型'
+        ws.cell(row=1, column=8).value = 'TEL'
         ws.cell(row=1, column=7).value = '微信'
-        ws.cell(row=1, column=8).value = '最后更新时间'
-        ws.cell(row=1, column=9).value = '来源'
+        ws.cell(row=1, column=5).value = '最后更新时间'
+        ws.cell(row=1, column=6).value = '来源'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # if url in self.douB.keys():         #配合调试url使用的
         #打开单个组，获取该组下所有有价值的单条url
         for url in self.douB.keys():
-            url = url + 'discussion'
-            # print(url)
-            # 定义一个新的字典，存放单个组内，筛选出来的结果
-            result = {}
-            temprusult = {} #临时存放
+            urlnew = url + 'discussion'
 
-            for num in range (0,200,25):
+            for num in range (0,20000,25):
                 data = {'start': num}
                 header = config['headers']
                 cookiea = self.configDouban['cookie']
-                errorNum = 0
-
                 # 关闭多余的连接
                 s = requests.sessions.session()
                 s.keep_alive = False
                 try:
-                    res = requests.get(url,data, headers = header, cookies = cookiea,timeout=10)
+                    res = requests.get(urlnew,data, headers = header, cookies = cookiea,timeout=10)
+                    # 增加request间隔时间，防止被封IP
+                    sleeptime = config['sleep']
+                    time.sleep(sleeptime)
                 except Exception as e:
                     errorNum += 1
-                    print("第%d次报错，此时url：%s,原因：%s" %(errorNum,url,e))
+                    print("%s,第%d次报错，url：%s,原因：%s" %(time.strftime('%H:%M:%S',time.localtime()),errorNum,urlnew,e))
                     continue
-                # 增加request间隔时间，防止被封IP
-                sleeptime = config['sleep']
-                time.sleep(sleeptime)
-                ########### 需要新增功能，如果帖子最新回复时间已经是5天前的了，整个num也不用循环了，直接跳出。所以需要一个新的方法，并且返回值
+
                 soup = BeautifulSoup(res.text,"lxml")
                 titles = soup.select('td.title > a')
                 links = soup.select('td.title > a')
@@ -108,8 +84,7 @@ class DoSearch():
                     link = link.get('href')
                     atime = atime.text
                     preTime = self.ftime
-
-                    # 当前这条数据的时间在5天前，就不要了，并且终止后面的循环
+                    # 当前这条数据的时间在5天前，就不要了，并且终止后面的循环(for else)
                     if atime < preTime:
                         break
 
@@ -123,111 +98,30 @@ class DoSearch():
                     #         i += 1
                     #
                     # if i == len(strNos):
-                    #     val = [title,atime]
-                    #     result[link] = val
+                    #     ws_max_row = ws.max_row
+                    #     ws_max_col = ws.max_column
+                    #     ws.cell(row=ws_max_row + 1, column=1).value = title.strip()
+                    #     ws.cell(row=ws_max_row + 1, column=5).value = atime
+                    #     ws.cell(row=ws_max_row + 1, column=2).value = link
+
                     # 保留在指定区域的数据
                     strareas = self.configDouban['Area']
                     for strarea in strareas:
                         if strarea in title:
-                            # val = [title,atime]
-                            # result[link] = val
-
-
-
-
                             ws_max_row = ws.max_row
                             ws_max_col = ws.max_column
-
                             ws.cell(row=ws_max_row+1, column=1).value = title.strip()
-                            ws.cell(row=ws_max_row+1, column=8).value = atime
+                            ws.cell(row=ws_max_row+1, column=5).value = atime
                             ws.cell(row=ws_max_row+1, column=2).value = link
-
-
-
-                            print('单条数据写入成功\n')
-
+                            ws.cell(row=ws_max_col+1, column=6).value = self.douB[url]
                             break
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 else:
                     continue
                 break
 
         # 保存Excel（可以覆盖保存）
         wb.save(file)
-        print('最终数据写入成功')
-
-
-
-
-
-
-
-
-
-
-
-
-    @property
-    def excel(self,dict):
-        '''
-        数据存储到Excel中
-        :return:
-        '''
-        wb = Workbook()
-        ws = wb.active
-        dir = os.getcwd()
-        filetime = time.strftime('_%Y%m%d_%H%M%S', time.localtime())
-        file = 'douban' + filetime + '.xlsx'
-
-        # 绘制Excel表格
-        ws.cell(row=1, column=1).value = '标题'
-        ws.cell(row=1, column=2).value = 'URL'
-        ws.cell(row=1, column=3).value = '价格'
-        ws.cell(row=1, column=4).value = '地区'
-        ws.cell(row=1, column=5).value = '户型'
-        ws.cell(row=1, column=6).value = 'TEL'
-        ws.cell(row=1, column=7).value = '微信'
-        ws.cell(row=1, column=8).value = '最后更新时间'
-        ws.cell(row=1, column=9).value = '来源'
-
-        ws_max_row = ws.max_row
-        ws_max_col = ws.max_column
-
-        lines = len(dict)
-
-        for line in lines:
-
-            for dic in dict:
-                # 往表格中输入数值
-                ws.cell(row=line,column=1).value = dict[dic][0]
-                ws.cell(row=line,column=8).value = dict[dic][1]
-                ws.cell(row=line,column=2).value = dic
-
-                print('单条数据写入成功\n')
-
-        # 保存Excel（可以覆盖保存）
-        wb.save(file)
-        print('最终数据写入成功')
+        print('最终excel数据写入成功',time.strftime('%H:%M:%S',time.localtime()))
 
     @property
     def ftime(self):
