@@ -56,8 +56,9 @@ r = requests.get('https://postman-echo.com/get')
 
 
 #########  原始响应内容
-# r = requests.get('https://postman-echo.com/get', stream=True)
-# print('原始响应内容:\n',r.raw , r.raw.read())
+r = requests.get('https://postman-echo.com/get', stream=True)
+print('原始响应内容:\n',r.raw , r.raw.read())
+r.close()
 
 
 #########  定制请求头  --> 这部分还是去看官方文档吧
