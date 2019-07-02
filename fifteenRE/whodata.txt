@@ -1,0 +1,8 @@
+wesc                 console             jun 23  20:33
+ewsc                 pts/9               jun 22  21:00
+wesc                 pts/8               jun 21  11:00
+wesc                 pts/7               jun 21  11:30
+wesc                 pts/6               jun 21  01:12
+wesc                 pts/5               jun 21  16:30
+wesc                 pts/4               jun 20  21:04
+wesc                 pts/3               jun 21  03:50
