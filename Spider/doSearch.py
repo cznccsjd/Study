@@ -139,7 +139,7 @@ class DoSearch():
                     moneyContext = re.findall(patMoney, context)
                     smoney1 = moneyTitle + moneyContext
                     smoney2 = str(smoney1)        #openpyxl将str写入一个单元格
-                    smoney = re.sub("[|]|'","",smoney2)
+                    smoney = re.sub('\[|\]|\'','',smoney2)
                     # stel = re.search(patTel,context)
                     # swechat = re.search(patWe,context)
 
