@@ -3,7 +3,7 @@
 执行豆瓣爬虫文件
 '''
 import time, datetime, requests, os,re
-from Study.Spider import douban
+from Spider import douban
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
 
@@ -200,8 +200,9 @@ class DoSearch():
 
         # 保存Excel（可以覆盖保存）
         wb.save(file)
-        print('最终excel数据写入成功：',time.strftime('%H:%M:%S',time.localtime()))
+        print('excel数据写入成功：',time.strftime('%H:%M:%S',time.localtime()))
         print('文件名：',file)
+        print('写入%d条数据' % ws_max_row)
 
     @property
     def ftime(self):
