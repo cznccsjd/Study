@@ -11,9 +11,9 @@ class DoSearch():
     def __init__(self):
         #本脚本开始执行时间，方便需要时查看执行效率
         print('脚本开始运行:', time.strftime('%H:%M:%S',time.localtime()))
-        engine = douban.Douban()
-        self.douB = engine.search()
-        self.configDouban = engine.config
+        self.engine = douban.Douban()
+        self.douB = self.engine.search()
+        self.configDouban = self.engine.config
 
     @property
     def config(self):
@@ -33,16 +33,14 @@ class DoSearch():
         后续需要拆分出多个方法
         :return:
         '''
-        config = self.config
-        errorNum = 0
-        sleeptime = config['sleep']
+        sleeptime = self.configDouban['sleep']
         wantedAreas = self.configDouban['Area']
+        otherfilter = self.configDouban['titlelimit']
+        wantedAreasStr = self.engine.restr(wantedAreas)
+        otherfilter = self.engine.restr(otherfilter)
+        errorNum = self.configDouban['errorNum']
         preTime = self.ftime
-        wantedAreasStr = ''
-        for wantedArea in wantedAreas:
-            wantedAreasStr += wantedArea
-            wantedAreasStr += '|'
-        wantedAreasStr = wantedAreasStr[:-1]  # 去掉末尾的|
+        linenums = 0
 
         # excel相关操作
         wb = Workbook()
@@ -65,20 +63,28 @@ class DoSearch():
         for url in self.douB.keys():
             urlnew = url + 'discussion'
             pagetitle = self.douB[url]
+            maxtitles = self.configDouban['titlemaxmun']
+            maxtitle = int(maxtitles)
+            if maxtitle <= 2000:
+                pass
+            else:
+                maxtitle = 2000     #人为设置2000，最多获取1975页
 
-            for num in range (0,2000,25):       #设置2000，最多获取1975页
+            for num in range (0,maxtitle,25):
                 data = {'start': num}
-                header = config['headers']
+                header = self.configDouban['headers']
                 cookiea = self.configDouban['cookie']
                 # 关闭多余的连接
                 s = requests.sessions.session()
                 s.keep_alive = False
+
                 try:
                     res = requests.get(urlnew,data, headers = header, cookies = cookiea,timeout=10)
                     # 增加request间隔时间，防止被封IP
                     time.sleep(sleeptime)
                 except Exception as e:
                     errorNum += 1
+                    self.configDouban['errorNum'] = errorNum
                     print("%s,第%d次报错，url：%s,原因：%s" %(time.strftime('%H:%M:%S',time.localtime()),errorNum,urlnew,e))
                     continue
 
@@ -99,9 +105,10 @@ class DoSearch():
                     if filterPagetitle is None:
                         continue
                     # 标题含有已租、限女的，也要去除
-                    filterPagetitlesex = re.search('已租|限女|长期有效', title)
+                    filterPagetitlesex = re.search(otherfilter, title)
                     if filterPagetitlesex is not None:
                         continue
+
                     # 打开具体某一条招租信息
                     try:
                         s = requests.sessions.session()
@@ -111,6 +118,7 @@ class DoSearch():
                         time.sleep(sleeptime)
                     except Exception as e:
                         errorNum += 1
+                        self.configDouban['errorNum'] = errorNum
                         print("%s,第%d次报错，url：%s,原因：%s" % (
                             time.strftime('%H:%M:%S', time.localtime()), errorNum, link, e))
                         continue
@@ -123,13 +131,23 @@ class DoSearch():
                     else:
                         stitle = title
 
+                    filtertitle = re.search(wantedAreasStr, stitle)
+                    if filtertitle is None:
+                        continue
+
+                    filtertitle1 = re.search(otherfilter, stitle)
+                    if filtertitle1 is not None:
+                        continue
+
                     contexts = soup.select('div.topic-richtext')
                     context = str(contexts)
                     conIndexsBegin = context.find('<p>')
                     conIndexsEnd = context.find('</p><div class="image-container image-float-center">')
                     context = context[conIndexsBegin:conIndexsEnd + 1]
 
-                    if context == '':
+                    if context == '' or context == '<p><':
+                        continue
+                    elif stitle == '':
                         continue
                     # 正则表达式，筛选出金额
                     patMoney = '[\D][\d]{4}[\D]'
@@ -150,50 +168,8 @@ class DoSearch():
                     ws.cell(row=ws_max_row+1, column=2).value = link
                     ws.cell(row=ws_max_row+1, column=6).value = pagetitle
                     ws.cell(row=ws_max_row+1, column=3).value = smoney
+                    linenums = ws_max_row
                     continue
-
-                    # title中包含不需要地区的数据，直接去除
-                    # strNos = self.configDouban['notArea']
-                    # i = 0
-                    # for strno in strNos:
-                    #     if strno in title:
-                    #         break
-                    #     else:
-                    #         i += 1
-                    #
-                    # if i == len(strNos):
-                    #     ws_max_row = ws.max_row
-                    #     ws_max_col = ws.max_column
-                    #     ws.cell(row=ws_max_row + 1, column=1).value = title.strip()
-                    #     ws.cell(row=ws_max_row + 1, column=5).value = atime
-                    #     ws.cell(row=ws_max_row + 1, column=2).value = link
-
-                    # 保留在指定区域的数据，下面的筛选用正则表达式替换了
-                    # strareas = self.configDouban['Area']
-                    # for strarea in strareas:
-                    #     if strarea in title:
-                    #         try:
-                    #             rs = requests.get(link,headers=header, cookies=cookiea, timeout=10)
-                    #             # 增加request间隔时间，防止被封IP
-                    #             time.sleep(sleeptime)
-                    #         except Exception as e:
-                    #             errorNum += 1
-                    #             print("%s,第%d次报错，url：%s,原因：%s" % (
-                    #             time.strftime('%H:%M:%S', time.localtime()), errorNum, link, e))
-                    #             continue
-                    #
-                    #         soup = BeautifulSoup(rs.text, "lxml")
-                    #         stitle = soup.select('#content > h1')
-                    #         links = soup.select('td.title > a')
-                    #         times = soup.select('td.time')
-                    #
-                    #         ws_max_row = ws.max_row
-                    #         ws_max_col = ws.max_column
-                    #         ws.cell(row=ws_max_row+1, column=1).value = title.strip()
-                    #         ws.cell(row=ws_max_row+1, column=5).value = atime
-                    #         ws.cell(row=ws_max_row+1, column=2).value = link
-                    #         ws.cell(row=ws_max_col+1, column=6).value = pagetitle
-                    #         continue
                 else:
                     continue
                 break
@@ -202,13 +178,13 @@ class DoSearch():
         wb.save(file)
         print('excel数据写入成功：',time.strftime('%H:%M:%S',time.localtime()))
         print('文件名：',file)
-        print('写入%d条数据' % ws_max_row)
+        print('写入%d条数据' % linenums)
 
     @property
     def ftime(self):
         # 获取指定x天前时间
-        config = self.config
-        day = config['date']
+        day = self.configDouban['date']
+        day = int(day)
         preday = (datetime.datetime.now() - datetime.timedelta(days=day)).strftime("%m-%d %H:%M")
         return preday
 
