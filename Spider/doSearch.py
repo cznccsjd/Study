@@ -4,6 +4,7 @@
 '''
 import time, datetime, requests, os,re
 from Spider import douban
+# from Study.Spider import douban
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
 
