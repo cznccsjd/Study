@@ -15,18 +15,6 @@ class DoSearch():
         self.douB = self.engine.search()
         self.configDouban = self.engine.config
 
-    @property
-    def config(self):
-        '''
-        后续参数化
-        :return:
-        '''
-        dict = {}
-        dict['date'] = 5
-        dict['headers'] = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'}
-        dict['sleep'] = 1
-        return dict
-
     def doDouBan(self):
         '''
         从douban.py获取url，执行爬虫操作
