@@ -7,12 +7,12 @@
 
 import requests, time, pymysql
 from bs4 import BeautifulSoup
-from Study.Spider.douban import Douban
+from Study.testForWork.Common import trans
 
 url = 'http://tms.51talk.com/training/traing_medium'
 url_ajax = 'http://tms.51talk.com/training/ajax_get_city'
 cookie = 'rmbUser=false; PHPSESSID=j2narg0cslv931kbqu8p4sv374; price_show_type=1; SpMLdaPx_uuid=802127918; __zlcmid=tIiO2xBnJdXz9S; _ga=GA1.2.289154381.1563169869; _gid=GA1.2.1342815520.1563169869; uuid=a4fc5c8a-fab3-4a5f-a603-3527538c00c8; www_ugroup=4; user_ust=I%2B0RRTZM5GktIrPO%2Bp5ipiySaWuM2ZnnfiT7iPFm0sTA1X%2BWU%2FTEVkDvRubSmK2RWNS6O82iq7dOSDDXnNcKgZzTwcPSRy4mSk2U81E%3D; user_usg=MC4CFQDRPprTOVDfspTzrq0ftIrIBxrsWAIVANH1slb35tuCtOUuFHocAQjrFBn4; ust_v=1; from_url=tms.51talk.com%2Cmypage.51talk.com%2Ccrm.51talk.com%2Clogin.51talk.com; Hm_lvt_cd5cd03181b14b3269f31c9cc8fe277f=1563173913; Hm_lpvt_cd5cd03181b14b3269f31c9cc8fe277f=1563174277; SpMLdaPx_poid=19; tms_training_sso=dGVhY2hlcklkPTEmZW1haWw9YWRtaW4%3D.21DDFE185D5C62EF230A8EB93EC06A5F; SpMLdaPx_pvid=1563188419843'
-cookiedict = Douban().dict(cookie, sign1=';', sign2='=')
+cookiedict = trans.Trans().dict(cookie, sign1=';', sign2='=')
 pros = []
 pagecities = []
 
