@@ -7,7 +7,7 @@ import re
 
 class Trans():
 
-    def cnlist(self, names, sign1=','):
+    def strtolist(self, names, sign1=','):
         '''
         将中文str转换为list
         :param names: 输入的中文字符串
@@ -30,7 +30,7 @@ class Trans():
         return tmp
 
 
-    def restr(self, names):
+    def restring(self, names):
         '''
         将re.sub()过滤的词组转换成符合条件的格式，str，eg：aa|bb|cc
         :return:
@@ -48,7 +48,7 @@ class Trans():
         return tmp
 
 
-    def dict(self, names, sign1=';', sign2='='):
+    def strtodict(self, names, sign1=';', sign2='='):
         '''
         将字符串转换为dict
         :param names: 输入的字符串
