@@ -30,29 +30,29 @@ class Douban():
 
         dictC['url1'] = url
         headers = conf.get('explore', 'headers')
-        header = Douban().dict(headers,':','')
+        header = Douban().stringtodict(headers,':','')
         dictC['headers'] = header
         sleep = conf.get('explore', 'timesleep')
         dictC['sleep'] = int(sleep)
         cookies = conf.get('explore', 'cookie')
-        cookie = Douban().dict(cookies,';','=')
+        cookie = Douban().stringtodict(cookies,';','=')
         dictC['cookie'] = cookie
         city = conf.get('filter', 'city')
         dictC['city'] = re.sub('\'|\"','',city)
 
         notArea = conf.get('filter', 'dislikearea')
-        dictC['notArea'] = Douban().cnlist(notArea)
+        dictC['notArea'] = Douban().cnstringtolist(notArea)
         Area = conf.get('filter', 'likearea')
-        dictC['Area'] = Douban().cnlist(Area)
+        dictC['Area'] = Douban().cnstringtolist(Area)
         titlelimit = conf.get('filter', 'titlelimit')
-        dictC['titlelimit'] = Douban().cnlist(titlelimit)
+        dictC['titlelimit'] = Douban().cnstringtolist(titlelimit)
         dictC['date'] = conf.get('explore', 'datetime')
         dictC['groupmaxnum'] = conf.get('explore', 'groupnum')
         dictC['titlemaxmun'] = conf.get('explore', 'titlenum')
         dictC['errorNum'] = 0
         return dictC
 
-    def cnlist(self,names, sign1=','):
+    def cnstringtolist(self,names, sign1=','):
         '''
         将中文str转换为list
         :param names: 输入的中文字符串
@@ -74,7 +74,7 @@ class Douban():
             pass
         return tmp
 
-    def restr(self, names):
+    def stringtore(self, names):
         '''
         将re.sub()过滤的词组转换成符合条件的格式，str，eg：aa|bb|cc
         :return:
@@ -91,7 +91,7 @@ class Douban():
             pass        #其他的先不处理？后续碰倒再优化
         return tmp
 
-    def dict(self, names, sign1=';', sign2='='):
+    def stringtodict(self, names, sign1=';', sign2='='):
         '''
         将字符串转换为dict
         :param names: 输入的字符串

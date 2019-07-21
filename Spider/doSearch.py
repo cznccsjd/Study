@@ -25,8 +25,8 @@ class DoSearch():
         sleeptime = self.configDouban['sleep']
         wantedAreas = self.configDouban['Area']
         otherfilter = self.configDouban['titlelimit']
-        wantedAreasStr = self.engine.restr(wantedAreas)
-        otherfilter = self.engine.restr(otherfilter)
+        wantedAreasStr = self.engine.stringtore(wantedAreas)
+        otherfilter = self.engine.stringtore(otherfilter)
         errorNum = self.configDouban['errorNum']
         preTime = self.ftime
         linenums = 0
