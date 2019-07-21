@@ -17,8 +17,8 @@ class Douban():
     @property
     def config(self):
         '''
-        配置，参数化，便于后续新增配置文件
-        :return:
+        从douban_config.ini文件中读取具体的配置信息
+        :return:dict，读取的配置拼成成字典
         '''
         curdir = os.getcwd()
         dir = os.path.join(curdir, 'douban_config.ini')
@@ -51,15 +51,14 @@ class Douban():
         dictC['groupmaxnum'] = conf.get('explore', 'groupnum')
         dictC['titlemaxmun'] = conf.get('explore', 'titlenum')
         dictC['errorNum'] = 0
-
         return dictC
 
     def cnstringtolist(self,names, sign1=','):
         '''
-        将中文str转换为list
+        将中文string转换为list，去掉中文中的'|'符号
         :param names: 输入的中文字符串
         :param sign1: 通过split(sign1)，将中文词组单独拿出来
-        :return:
+        :return:转换完成的包含中文的list
         '''
         tmp = []
         name = re.sub(r'\[|\]|\\|\'', '', names)
@@ -78,8 +77,8 @@ class Douban():
 
     def stringtore(self, names):
         '''
-        将re.sub()过滤的词组转换成符合条件的格式，str，eg：aa|bb|cc
-        :return:
+        将re.sub()过滤的词组转换成符合条件的格式
+        :return:string，eg：aa|bb|cc
         '''
         tmp = ''
         if type(names) == str:
@@ -97,9 +96,9 @@ class Douban():
         '''
         将字符串转换为dict
         :param names: 输入的字符串
-        :param sign1:
-        :param sign2:
-        :return:
+        :param sign1:第一次分隔的符号
+        :param sign2:第二次分割的分号
+        :return:转换完成的dict
         '''
         tmp = {}
         name = re.sub('\{|\}|\'|\"', '', names)
@@ -123,7 +122,7 @@ class Douban():
     def search(self):
         '''
         执行搜索动作，获取相应后的小组名称和url
-        :return:
+        :return:返回符合搜索条件的小组url
         '''
         urls = {}   # 定义一个字典存储BeautifulSoup处理后的豆瓣租房小组的标题和url
         conf = self.config

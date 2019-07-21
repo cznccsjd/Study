@@ -18,7 +18,7 @@ class DoSearch():
 
     def doDouBan(self):
         '''
-        从douban.py获取url，执行爬虫操作
+        从douban.py获取url，执行爬虫操作，将最终结果写入到Excel中
         后续需要拆分出多个方法
         :return:
         '''
