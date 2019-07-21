@@ -24,35 +24,34 @@ class Douban():
         dir = os.path.join(curdir, 'douban_config.ini')
         conf = configparser.RawConfigParser()  # 使用RawConfigParser()规避读取cookie时，%引发的报错
         conf.read(dir, encoding='utf-8')
-        dictC = {}
         url = conf.get('explore', 'group')
         url1 = re.sub('\'|\"','',url)
-
         keywords = conf.get('search','keyword')
-        dictC['keyword'] = keywords
-
-        dictC['url1'] = url
         headers = conf.get('explore', 'headers')
         header = Douban().stringtodict(headers,':','')
-        dictC['headers'] = header
         sleep = conf.get('explore', 'timesleep')
-        dictC['sleep'] = int(sleep)
         cookies = conf.get('explore', 'cookie')
         cookie = Douban().stringtodict(cookies,';','=')
-        dictC['cookie'] = cookie
         city = conf.get('filter', 'city')
-        dictC['city'] = re.sub('\'|\"','',city)
-
         notArea = conf.get('filter', 'dislikearea')
-        dictC['notArea'] = Douban().cnstringtolist(notArea)
         Area = conf.get('filter', 'likearea')
-        dictC['Area'] = Douban().cnstringtolist(Area)
         titlelimit = conf.get('filter', 'titlelimit')
+
+        dictC = {}
+        dictC['keyword'] = keywords
+        dictC['url1'] = url
+        dictC['headers'] = header
+        dictC['sleep'] = int(sleep)
+        dictC['cookie'] = cookie
+        dictC['city'] = re.sub('\'|\"', '', city)
+        dictC['notArea'] = Douban().cnstringtolist(notArea)
+        dictC['Area'] = Douban().cnstringtolist(Area)
         dictC['titlelimit'] = Douban().cnstringtolist(titlelimit)
         dictC['date'] = conf.get('explore', 'datetime')
         dictC['groupmaxnum'] = conf.get('explore', 'groupnum')
         dictC['titlemaxmun'] = conf.get('explore', 'titlenum')
         dictC['errorNum'] = 0
+
         return dictC
 
     def cnstringtolist(self,names, sign1=','):
