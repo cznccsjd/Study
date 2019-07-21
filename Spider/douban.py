@@ -28,6 +28,9 @@ class Douban():
         url = conf.get('explore', 'group')
         url1 = re.sub('\'|\"','',url)
 
+        keywords = conf.get('search','keyword')
+        dictC['keyword'] = keywords
+
         dictC['url1'] = url
         headers = conf.get('explore', 'headers')
         header = Douban().stringtodict(headers,':','')
@@ -177,7 +180,8 @@ class Douban():
         while(num >= 0):
             conf = self.config
             searchurl = conf['url1']
-            searchdata = {'start':num, 'cat': '1019', 'q': '北京租房'}      #cat=1019是直接通过豆瓣页面获取到               ###这里参数化一下，就能应用到整个豆瓣小组了
+            searchkeyword = conf['keyword']
+            searchdata = {'start':num, 'cat': '1019', 'q': searchkeyword}      #cat=1019是直接通过豆瓣页面获取到               ###这里参数化一下，就能应用到整个豆瓣小组了
             return searchurl, searchdata
 
     def searchResult(self,title):
