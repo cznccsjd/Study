@@ -5,24 +5,27 @@ import requests, time
 from bs4 import BeautifulSoup
 
 class RequestAndSoup():
-    def request(self, url, type='get', params=None, data=None, json=None, sleeptime=0, **kwargs):
+    def request(self, url, type='get', cookies=None, params=None, data=None, json=None, sleeptime=0, **kwargs):
         # 关闭多余的连接
         s = requests.sessions.session()
         s.keep_alive = False
 
         if type == 'post':
+            '''
+            post方法有问题，需要详细了解下post用法
+            '''
             try:
-                res = requests.post('post', url, data, json, **kwargs)
+                resp = requests.post(url, data, cookies, json, **kwargs)
                 time.sleep(sleeptime)
             except Exception as e:
                 print("ERROR:%s" %e)
         else:
             try:
-                res = requests.get(url, params, **kwargs)
+                resp = requests.get(url, params, cookies, **kwargs)
                 time.sleep(sleeptime)
             except Exception as e:
                 print("ERROR:%s" %e)
-        return res
+        return resp
 
 
 

@@ -3,7 +3,7 @@
 数据格式转换文件
 '''
 
-import re
+import re, time
 
 class Trans():
 
@@ -74,3 +74,53 @@ class Trans():
         else:
             pass
         return tmp
+
+    def tupletolist(self, tuple):
+        '''
+        将pymysql返回的tuple，去掉()，变为通用的list
+        :param tuple:
+        :param sign1:
+        :return:
+        '''
+        list = []
+        string = str(tuple)
+        tmplist = re.sub('\(|\)','',string)
+        strlist = re.sub(',,',',',tmplist)
+        if strlist[-1] == ',':
+            strlist = strlist[:-1]
+        strs = strlist.split(',')
+        for i in strs:
+            # ii = int(i)
+            list.append(i)
+        return list
+
+    def stringtodict(self, names, sign1=';', sign2='='):
+        '''
+        将字符串转换为dict
+        :param names: 输入的字符串
+        :param sign1:第一次分隔的符号
+        :param sign2:第二次分割的分号
+        :return:转换完成的dict
+        '''
+        tmp = {}
+        name = re.sub('\{|\}|\'|\"', '', names)
+
+        if len(name) == 0:
+            pass
+        elif type(name) == str:
+            items = name.split(sign1)
+            if len(items) > 2:
+                for item in items:
+                    kv = item.split(sign2)
+                    tmp[kv[0]] = kv[1]
+            else:
+                tmp[items[0]] = items[1]
+        elif type(name) == dict:
+            tmp = name
+        else:
+            pass
+        return tmp
+
+
+if __name__ == '__main__':
+    Trans().tupletolist(tuple=((2603,), (3111,), (3126,), (3164,)))
