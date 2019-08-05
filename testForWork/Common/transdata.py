@@ -121,6 +121,13 @@ class Trans():
             pass
         return tmp
 
+    def dicttostring(self, dict, sign1=',', sign2=':'):
+        strdict = str(dict)
+        strdicttmp = re.sub("\{|\}|\'|\"", "", strdict)
+        strtmp = re.sub(sign1, ';', strdicttmp)
+        string = re.sub(sign2, '=', strtmp)
+        return string
 
 if __name__ == '__main__':
-    Trans().tupletolist(tuple=((2603,), (3111,), (3126,), (3164,)))
+    # Trans().tupletolist(tuple=((2603,), (3111,), (3126,), (3164,)))
+    Trans().dicttostring({"pp":1,'b':'aa'},',',':')
