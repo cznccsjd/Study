@@ -12,13 +12,13 @@ import time
 urlDefault = DomainUrl.Domainurl().url('crm')
 
 class CrmLogin():
-    def login(self):
+    def login(self, uname, passwd):
         url = urlDefault + '/admin/admin_login.php'
         urlLogin = urlDefault + '/admin/login.php'
         urlTest = urlDefault + '/Channel/channelList'
         payload = {
-            'user_name':'admin',
-            'password':123456,
+            'user_name': uname,
+            'password':passwd,
             'ref':'',
             'user_type':'admin',
             'Submit':'登 录'
@@ -38,6 +38,9 @@ class CrmLogin():
         if u"机会分类配置" in resJihui.text:
             print(111)
             print('后续考虑，返回什么值？')
+            return cookieLogin
+        else:
+            print('%s登录出现问题，请检查！！', uname)
 
 
     def loginSe(self, uname='admin', upasswd='123456'):
@@ -67,4 +70,4 @@ class CrmLogin():
 
 if __name__ == '__main__':
     # CrmLogin().loginSe()
-    CrmLogin().login()
+    CrmLogin().login('admin', 123456)
