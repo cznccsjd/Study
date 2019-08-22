@@ -39,20 +39,22 @@ def event_manage(request):
     return render(request, 'event_manage.html', {"user":username, "events":event_list})
 
 # 嘉宾管理
+@login_required
 def guest_manage(request):
     username = request.session.get('user', '')
     guest_list = Guest.objects.all()
-    paginator = Paginator(guest_list, 2)
-    page = request.Get.get('page')
-    try:
-        contacts = paginator.page(page)
-    except PageNotAnInteger:
-        # 如果page不是整数，取第一页面数据
-        contacts = paginator.page(1)
-    except EmptyPage:
-        # 如果page不在范围，取最后一页面
-        contacts = paginator.page(paginator.num_pages)
-    return render(request, "guest_manage.html", {"user":username, "guest":contacts})
+    # paginator = Paginator(guest_list, 2)
+    # page = request.Get.get('page')
+    # try:
+    #     contacts = paginator.page(page)
+    # except PageNotAnInteger:
+    #     # 如果page不是整数，取第一页面数据
+    #     contacts = paginator.page(1)
+    # except EmptyPage:
+    #     # 如果page不在范围，取最后一页面
+    #     contacts = paginator.page(paginator.num_pages)
+    # return render(request, "guest_manage.html", {"user":username, "guest":contacts})
+    return render(request, "guest_manage.html", {"user":username, "guest":guest_list})
 
 # 发布会名称搜索
 @login_required
