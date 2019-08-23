@@ -18,11 +18,11 @@ class Domainurl():
             protocol = 'http://'
 
         curdir = os.getcwd()
-        if 'Common' in curdir:
+        if 'Conf' in curdir:
             conffile = os.path.join(curdir,'url.ini')
         elif 'Service' in curdir:
             pardir = os.path.dirname(curdir)
-            conffile = os.path.join(pardir,'Common','url.ini')
+            conffile = os.path.join(pardir,'Conf','url.ini')
         else:
             print('Error:%s还没有适配，请在DomainUrl.py文件中进行适配！！！' % curdir)
         conf = configparser.ConfigParser()
