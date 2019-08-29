@@ -25,6 +25,9 @@ class Guest(models.Model):
     def __str__(self):
         return self.realname
 
+
 class Meta:
     unique_together = ("event", "phone")
+
+
 

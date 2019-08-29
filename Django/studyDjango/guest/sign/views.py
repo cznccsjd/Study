@@ -65,4 +65,5 @@ def search_name(request):
     return render(request, "event_manage.html", {"user":username, "events":event_list})
 
 if __name__ == '__main__':
-    guest_manage()
+    # guest_manage()
+    event_manage()
