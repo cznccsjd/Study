@@ -54,7 +54,7 @@ def guest_manage(request):
     #     # 如果page不在范围，取最后一页面
     #     contacts = paginator.page(paginator.num_pages)
     # return render(request, "guest_manage.html", {"user":username, "guest":contacts})
-    return render(request, "guest_manage.html", {"user":username, "guest":guest_list})
+    return render(request, "guest_manage.html", {"user":username, "guests":guest_list})
 
 # 发布会名称搜索
 @login_required
