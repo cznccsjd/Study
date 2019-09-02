@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
+<!--    <meta charset="UTF-8">-->
     {% load bootstrap3 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <title>Guest Manage</title>
 </head>
 
-<body>
+<body role="document">
     <!--导航栏-->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -27,9 +27,20 @@
             </div>
         </div>
     </nav>
-
+    <!--    嘉宾搜索功能-->
+<!--    功能没有实现，怎么都觉得是HTML的问题-->
+    <div class="page-header" style="padding-top: 60px;">
+        <div id="navbar1" class="navbar-collapase collapse">
+            <form class="navbar-form" method="get" action="/search_guestname/">
+                <div class="form-group">
+                    <input name="name" type="text" placeholder="名称" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">搜索</button>
+            </form>
+        </div>
+    </div>
     <!--嘉宾列表-->
-    <div class="row" style="padding-top: 80px;">
+    <div class="row">
         <div class="col-md-6">
             <table class="table table-striped">
                 <thead>
@@ -68,5 +79,6 @@
             {% endif %}
         </span>
     </div>
+
 </body>
 </html>
