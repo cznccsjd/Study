@@ -28,7 +28,9 @@ def login_action(request):
             return render(request, 'index.html', {'error': 'username or password error!'})
 
 def logout(request):
-    return render(request, "index.html")
+    auth.logout(request)        #退出登录
+    response = HttpResponseRedirect('/index')
+    return response
 
 # 发布会管理
 @login_required

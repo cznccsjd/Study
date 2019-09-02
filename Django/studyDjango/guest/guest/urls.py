@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^search_guestname/$', views.search_guestName),
     url(r'^sign_index/(?P<eid>[0-9]+)/$', views.sign_index),
     url(r'^sign_index_action/(?P<eid>[0-9]+)/$', views.sign_index_action),
+    url(r'^logout/$', views.logout),
 ]
