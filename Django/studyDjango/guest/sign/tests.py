@@ -130,3 +130,8 @@ class GuestManageTest(TestCase):
     #     self.assertEqual(response.status_code, 200)
     #     self.assertIn(b'alen', response.content)
     #     self.assertIn(b'18601000111', response.content)
+
+class SignTest():
+    '''
+    签到功能测试
+    '''
