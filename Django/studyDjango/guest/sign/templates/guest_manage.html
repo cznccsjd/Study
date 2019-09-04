@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!--    <meta charset="UTF-8">-->
+
     {% load bootstrap3 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -28,12 +28,12 @@
         </div>
     </nav>
     <!--    嘉宾搜索功能-->
-<!--    功能没有实现，怎么都觉得是HTML的问题-->
+<!--    功能没有实现，实在定位不到是谁的问题-->
     <div class="page-header" style="padding-top: 60px;">
         <div id="navbar1" class="navbar-collapase collapse">
             <form class="navbar-form" method="get" action="/search_guestname/">
                 <div class="form-group">
-                    <input name="name" type="text" placeholder="名称" class="form-control">
+                    <input name="name" type="text" placeholder="请输入手机号" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-success">搜索</button>
             </form>
