@@ -2,6 +2,8 @@
 from django.http import JsonResponse
 from sign.models import Event, Guest
 from django.core.exceptions import ValidationError
+from django.db.utils import IntegrityError
+import time
 
 # 添加发布会接口
 def add_event(request):
@@ -44,13 +46,13 @@ def add_guest(request):
     if realname == '' or phone == '' or email == '' or event_id == '':
         return JsonResponse({'status':10021, 'message':'Parameter error'})
 
-    result = Guest.objects.filter(id = event_id)
+    result = Event.objects.filter(id=event_id)
     if not result:
        return JsonResponse({'status':10022, 'message':'event id is null'})
 
-    result = Guest.objects.filter(realname=realname)
-    if result:
-        return JsonResponse({'status':10023, 'message':'realname is already exists'})
+    result = Event.objects.get(id=event_id).status
+    if not result:
+        return JsonResponse({'status':10023, 'message':'event is not available'})
 
     result = Guest.objects.filter(phone=phone)
     if result:
@@ -65,7 +67,27 @@ def add_guest(request):
     guest_count = Guest.objects.get(event_id=event_id)
     if len(guest_count) >= event_limit:
         return JsonResponse({'status':10026, 'message':'event number is full'})
+
     # 判断某个嘉宾的注册时间是否超过活动开始时间
+    event_time = Event.objects.get(id=event_id)     #发布会的时间
+    etime = str(event_time).split(".")[0]
+    timeArray = time.strptime(etime, "%Y-%m-%d %H:%M:%S")
+    e_time = int(time.mktime(timeArray))
+
+    now_time = str(time.time())     #当前的时间
+    ntime = now_time.split(".")[0]
+    n_time = int(now_time)
+
+    if n_time >= e_time:
+        return JsonResponse({'status':10027, 'message':'event has started'})
 
     try:
-        Guest.objects.create(realname=realname, phone=phone, email=email, sign=int(sign), create_time=create_time, event_id=event_id)
+        Guest.objects.create(realname=realname, phone=int(phone), email=email, sign=0, create_time=n_time, event_id=int(event_id))
+    except IntegrityError:
+        return JsonResponse({'status':10028, 'message':'the event guest phone number repeat'})
+
+    return JsonResponse({'status':200, 'message':'add guest success'})
+
+# 发布会查询接口
+def get_event_list(request):
+    pass
