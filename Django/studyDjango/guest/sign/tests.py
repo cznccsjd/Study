@@ -138,7 +138,10 @@ class SignTest(TestCase):
     def setUp(self):
         User.objects.create_user('admin', 'admin@mail.com', 'admin123456')
         Event.objects.create(id=1, name='xiaomi5', limit=2000, address='beijing', status=1, start_time='2019-09-05 12:00:00')
+        Event.objects.create(id=2, name='Honor 8', limit=2000, address='beijing', status=1,
+                             start_time='2019-09-10 15:00:00')
         Guest.objects.create(id=1, realname='Leibusi', phone=19112345678, email='19112345678@test.com', sign=0, create_time='2019-09-05 18:00:00', event_id =1)
+        Guest.objects.create(id=2, realname='Hou', phone=13112345678, email='test@test.com', sign=1, create_time='2019-09-10 15:00:00', event_id=2)
         self.login_user = {'username':'admin', 'password':'admin123456'}
 
     def test_sign_index_success(self):
@@ -146,36 +149,48 @@ class SignTest(TestCase):
         进入指定活动成功
         :return:
         '''
-        response = self.client.post('login_action/', data=self.login_user)
+        response = self.client.post('/login_action/', data=self.login_user)
         response = self.client.post('/sign_index/1/')
-        print(response.content)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(b'xiaomi5', response.content)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'xiaomi5', response.content)
 
     def test_sign_success(self):
         '''
         签到成功
         :return:
         '''
-        pass
+        response = self.client.post('/login_action/', data=self.login_user)
+        response = self.client.post('/sign_index_action/1/', data={'phone':'19112345678'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"sign in success!", response.content)
+
 
     def test_sign_error_phone_not_exit(self):
         '''
         用不存在的手机号（手机号格式错误）签到
         :return:
         '''
-        pass
+        response = self.client.post('/login_action/', data=self.login_user)
+        response = self.client.post('/sign_index_action/1/', data={'phone':'191'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"phone error.", response.content)
 
     def test_sign_error_phone_not_belong(self):
         '''
         手机号不属于本活动
         :return:
         '''
-        pass
+        response = self.client.post('/login_action/', data=self.login_user)
+        response = self.client.post('/sign_index_action/1/', data={'phone': '13112345678'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"event id or phone error.", response.content)
 
     def test_sign_error_phone_already_sign(self):
         '''
         手机号已签到
         :return:
         '''
-        pass
+        response = self.client.post('/login_action/', data=self.login_user)
+        response = self.client.post('/sign_index_action/2/', data={'phone': '13112345678'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"user has sign in.", response.content)

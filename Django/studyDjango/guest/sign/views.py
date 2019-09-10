@@ -77,7 +77,6 @@ def search_guestName(request):
 # 签到页面
 @login_required
 def sign_index(request, eid):
-    print("hello")
     event = get_object_or_404(Event, id=eid)
     # guests = Guest.objects.get(event_id=eid)
     guests = Guest.objects.all()
