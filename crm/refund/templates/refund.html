@@ -2,9 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>refund</title>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>退款管理系统</title>
 </head>
 <body>
+    <!--查询信息-->
+    <div>
+        <h5>学员信息查询</h5>
+        <form name="user_input" method="get" onsubmit="return checkUserInfo()">
+            <select name="user_mode">
+            <option value="user_id" selected>stu_id</option>
+            <option value="phone">mobile</option>
+            </select>
+            <input type="text" value="请输入学员信息" onfocus="if(value=='请输入学员信息')value=''" onblur="if(!value)value='请输入学员信息111'" name="keyword" onclick="checkUserInfo()"/>
+            <input type="submit" value="查询" name="user_info"/>
+        </form>
+        <script>
+            function checkUserInfo()
+            {
+                if (user_input.keyword.value == "请输入学员信息")
+                {
+                    alert("请输入学员id或者学员手机号码！");
+                }
+            }
+        </script>
+    </div>
+    <!--客服申请退款-->
+    <div>
+        <h4>{{user}}学员订单信息展示</h4>
+        <div>
+            <table class="user_order_talbe">
+                <thead>
+                    <tr>
+                        <th>订单ID</th><th>学员ID</th><th>学员手机号</th><th>套餐类型</th><th>支付方式</th><th>套餐金额</th><th>折扣金额</th><th>下单时间</th><th>退款操作</th><th>退款状态</th><th>退款提交人</th><th>退款处理专员</th><th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{order.order_id}}</td>
+                            <td>{{order.stu_id}}</td>
+                            <td>{{order.mobile}}</td>
+                            <td>{{order.package_type}}</td>
+                            <td>{{order.order_type}}</td>
+                            <td>{{order.package_money}}</td>
+                            <td>{{order.discount}}</td>
+                            <td>{{order.order_time}}</td>
+                            <td>{{order.refund_status}}</td>
+                            <td>{{order.refund_submitter}}</td>
+                            <td>{{order.refund_apply}}</td>
+                            <td>
+                                <script>
+                                    <!--如果未退款，显示退款按钮，进入退款begin-->
+                                    <!--如果客服已提交退款，显示退款专员待处理，进入退款专员处理页面-->
+                                    <!--如果退款专员已提交，显示财务待处理，进入财务处理页面-->
+                                </script>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--退款专员处理-->
+    <div></div>
+    <!--财务处理-->
+    <div></div>
 
 </body>
+
 </html>
