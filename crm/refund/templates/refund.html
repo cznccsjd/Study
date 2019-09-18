@@ -16,7 +16,7 @@
             <option value="user_id" selected>stu_id</option>
             <option value="phone">mobile</option>
             </select>
-            <input type="text" value="请输入学员信息" onfocus="if(value=='请输入学员信息')value=''" onblur="if(!value)value='请输入学员信息111'" name="keyword" onclick="checkUserInfo()"/>
+            <input type="text" value="请输入学员信息" onfocus="if(value=='请输入学员信息')value=''" onblur="if(!value)value='请输入学员信息'" name="keyword" onclick="checkUserInfo()"/>
             <input type="submit" value="查询" name="user_info"/>
         </form>
         <script>
@@ -31,7 +31,10 @@
     </div>
     <!--客服申请退款-->
     <div>
-        <h4>{{user}}学员订单信息展示</h4>
+        <div id="user_info" action="/user_info/">
+            <h4>学员:{{user.id}}[{{user.mobile}}]订单信息展示</h4>
+        </div>
+
         <div>
             <table class="user_order_talbe">
                 <thead>
