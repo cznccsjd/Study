@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22_标签语义化</title>
+    <style>
+        p {
+            font-size: 2em;
+            font-weight: bolder;
+        }
+
+        strong::after {
+            content: url(../img/baidu.gif);
+        }
+    </style>
+</head>
+<body>
+    <!-- 1.使用p元素实现H1效果 -->
+    <h1>这是个加粗的文字，使用H1标签</h1>
+    <p>这也是个加粗的文字，使用的p标签，style中，设置了p的样式</p>
+
+    <!-- 2.使用strong实现img元素 -->
+    <img src="../img/baidu.gif" alt="百度gif没加载成功">
+    <!-- <strong>这也是百度图片</strong> -->
+    <strong></strong>
+</body>
+</html>
