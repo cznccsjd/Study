@@ -1,0 +1,27 @@
+/* 指定css文件的编码 */
+@charset "utf-8"
+
+
+/* 选择器 {
+    属性名：属性值
+} */
+
+
+/* 单个选中h1元素 */
+h1 {
+    font-size: 50px;
+}
+
+div {
+    font-size: 30px;
+    color: aqua;
+    font-family: "华文宋体";
+}
+/* 类选择器 */
+.cls {
+    color: burlywood;
+}
+/* 并集选择器 */
+h1, a {
+    color:lawngreen;
+}
