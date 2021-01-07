@@ -4,6 +4,7 @@
 import os, random, re, requests, sys, time
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
+from Spider.buildings import Building
 
 # 楼盘的正则条件
 #楼号
@@ -100,7 +101,7 @@ def get_building_summary():
     # 先确认是兴辰佳苑
     project_infos = soup.find('td', {'id':'项目名称'})
     if "兴辰佳苑" not in project_infos.contents[0]:
-        print("获取的不是兴辰佳苑项目")
+        print("获取的不是兴辰佳苑[中建.京西印玥]项目")
         sys.exit()
 
     # 判断楼盘表格是否存在
@@ -137,6 +138,14 @@ def get_building_summary():
         build_summary_infos[b_num] = [b_sale_avail_num, b_sale_ave_price, 'http://bjjs.zjw.beijing.gov.cn/'+url]
     print(build_summary_infos)
     return build_summary_infos
+
+# 获取签约信息
+def get_sign_contract():
+    url = 'http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=320801&projectID=6849021&systemID=2&srcId=1'
+    print("京西印玥截止到今天的签约数据如下：\n")
+    ret = Building().get_sign_contract_infos(url)
+    if ret:
+        print(ret)
 
 def set_excel(datas):
     # excel相关操作
@@ -178,5 +187,6 @@ def set_excel(datas):
     print('脚本结束时间:', time.strftime('%H:%M:%S',time.localtime()))
 
 
-infos = get_building_summary()
-get_building_detail(infos)
+# infos = get_building_summary()
+# get_building_detail(infos)
+get_sign_contract()

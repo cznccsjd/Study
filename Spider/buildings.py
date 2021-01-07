@@ -7,10 +7,59 @@ from bs4 import BeautifulSoup
 from openpyxl import Workbook
 
 class Building:
+    #todo 新增一个excel
+    def add_excel_for_house_detail(self):
+        pass
+
     def file_is_exists(self, filename):
         return os.path.exists(filename)
 
+    def get_sign_contract_infos(self, url):
+        if not url:
+            print("url不能为空")
+            sys.exit()
 
+        req = requests.get(url)
+        res = req.text
+
+        soup = BeautifulSoup(res, 'html.parser')
+        divs = soup.find_all('div', {'id':'Div_presellItemMortagageInfo'})
+        sign_infos = divs[2].text
+
+        if "期房签约统计" not in sign_infos:
+            print("目前没有期房签约统计数据了，排查下官网吧")
+            return False
+
+        if "住宅" not in sign_infos:
+            print("目前没有住宅数据，后续再来查询吧")
+            return False
+
+        info_tmps = sign_infos.split('住宅')[1]
+        info_tmp = info_tmps.split('本网站')[0]
+
+        if "丙类储藏间" in info_tmp:
+            info_houses = info_tmp.split('丙类储藏间')[0]
+            info_stores = info_tmp.split('丙类储藏间')[1]
+
+            houses = info_houses.split('\n')
+            stores = info_stores.split('\n')
+
+            # 住宅已签约套数
+            sign_houses_num_total = houses[1]
+            # 住宅已签约面积
+            sign_houses_area_total = houses[2]
+            # 住宅成交均价
+            sign_houses_price_avg = houses[3]
+            # 丙类储物间已签约套数
+            sign_stores_num_total = stores[1]
+            # 丙类储物间已签约面积
+            sign_stores_area_total = stores[2]
+            # 丙类储物间成交均价
+            sign_stores_price_avg = stores[3]
+
+        return [sign_houses_num_total, sign_houses_area_total, sign_houses_price_avg, sign_stores_num_total, sign_stores_area_total, sign_stores_price_avg]
+
+    # 确认打开的页面是否正确
     def verify_page_infos(self, url, project_name):
         req = requests.get(url)
         res = req.text
