@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格标签</title>
+</head>
+<body>
+    <!-- table tr th td catpion -->
+    <!-- table:表格最外层容器 -->
+    <!-- tr:定义表格行 -->
+    <!-- th:定义表头 -->
+    <!-- td:定义表格单元 -->
+    <!-- caption:定义表格标题 -->
+    <!-- 有嵌套关系，要符合嵌套规范 -->
+    <table>
+        <caption><strong>天气预报出行指引</strong></caption>
+        <tr>
+            <th>日期</th>
+            <th>天气情况</th>
+            <th>出行情况</th>
+        </tr>
+        <tr>
+            <td>2019/1/1</td>
+            <td><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+        <tr>
+            <td>2019/1/2</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+    </table>
+
+
+    
+    <!-- border:表格边框 -->
+    <table border=1>
+        <caption><strong>天气预报出行指引</strong></caption>
+        <tr>
+            <th>日期</th>
+            <th>天气情况</th>
+            <th>出行情况</th>
+        </tr>
+        <tr>
+            <td>2019/1/1</td>
+            <td><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+        <tr>
+            <td>2019/1/2</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+    </table>
+
+
+    <!-- cellpadding:单元格内的空间 -->
+    <table border="1" cellpadding="30">
+        <caption><strong>天气预报出行指引</strong></caption>
+        <tr>
+            <th>日期</th>
+            <th>天气情况</th>
+            <th>出行情况</th>
+        </tr>
+        <tr>
+            <td>2019/1/1</td>
+            <td><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+        <tr>
+            <td>2019/1/2</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+    </table>
+
+
+    <!-- cellspacing:单元格之间的空间 -->
+    <table border="1" cellpadding="30" cellspacing="30">
+        <caption><strong>天气预报出行指引</strong></caption>
+        <tr>
+            <th>日期</th>
+            <th>天气情况</th>
+            <th>出行情况</th>
+        </tr>
+        <tr>
+            <td>2019/1/1</td>
+            <td><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+        <tr>
+            <td>2019/1/2</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+    </table>
+
+
+
+    <!-- rowsapn:合并行   colspan:合并列 -->
+    <table border="1" cellpadding="30">
+        <caption><strong>天气预报出行指引</strong></caption>
+        <tr>
+            <th colspan = "2">日期</th>
+            <th>天气情况</th>
+            <th>出行情况</th>
+        </tr>
+        <tr>
+            <td rowspan="2">2019/1/1</td>
+            <td>白天</td>
+            <td><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+        <tr>
+            <!-- <td>2019/1/1</td> -->
+            <td>夜晚</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+        <tr>
+            <td rowspan="2">2019/1/2</td>
+            <td>白天</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+        <tr>
+            <!-- <td>2019/1/2</td> -->
+            <td>夜晚</td>
+            <td><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+    </table>
+
+
+    
+
+    <!-- align:左中右对齐  left center right -->
+    <!-- valign:上中下对齐  top middle bottom -->
+    <table border="1" cellpadding="30">
+        <caption><strong>天气预报出行指引 align valign</strong></caption>
+        <tr>
+            <th colspan = "2" align="right">日期</th>
+            <th>天气情况</th>
+            <th>出行情况</th>
+        </tr>
+        <tr>
+            <td rowspan="2">2019/1/1</td>
+            <td align="right">白天</td>
+            <td valign="up"><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+        <tr>
+            <!-- <td>2019/1/1</td> -->
+            <td>夜晚</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+        <tr>
+            <td rowspan="2">2019/1/2</td>
+            <td valign="bottom">白天</td>
+            <td><img src="../img/weather_thunder.png" alt="" width="50" height="50"></td>
+            <td>雷阵雨，请小心</td>
+        </tr>
+        <tr>
+            <!-- <td>2019/1/2</td> -->
+            <td>夜晚</td>
+            <td><img src="../img/weather_cloud.png" alt="" width="50" height="50"></td>
+            <td>天气晴朗，适合出行</td>
+        </tr>
+    </table>    
+</body>
+</html>

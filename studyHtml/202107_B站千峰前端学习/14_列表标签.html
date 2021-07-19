@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 无序列表 -->
+    <!-- ul和li必须一块出现，中间不能出现其他标签 -->
+    <ul>
+        <li>第一项</li>
+        <li>第二项</li>
+        <li><a href="http://www.baidu.com">点击百度</a></li>
+        <li><a href="#"><strong>这是个粗的</strong></a></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <!-- 有序列表，用ol，一般用的很少，基本上都是用无序列表 -->
+    <ol>
+        <li>第一项</li>
+        <li>第二项</li>
+        <li>第三项</li>
+    </ol>
+
+    <ol type='a'>
+        <li>第一项</li>
+        <li>第二项</li>
+        <li>第三项</li>
+    </ol>
+
+    <!-- 定义列表，dl dt dd 列表项需要添加标题和对标题进行描述的内容 -->
+    <dl>
+        <dt>HTML</dt>
+        <dd>超文本描述</dd>
+        <dt>CSS</dt>
+        <dd>样式</dd>
+        <dt>javaScript</dt>
+        <dd>js代码</dd>
+    </dl>
+
+    <!-- 嵌套列表  -->
+    <!-- 列表之间可以互相嵌套，形成多层次列表 -->
+    <ul>
+        <li>
+            辽宁省
+            <ul>
+                <li>大连市</li>
+                <li>沈阳市</li>
+                <li>鲅鱼圈</li>
+            </ul>
+        </li>
+        <li>
+            山东省
+            <ul>
+                济南市
+            </ul>
+            <ul>
+                青岛市
+            </ul>
+            <ul>潍坊市</ul>
+        </li>
+    </ul>
+
+
+    <dl>
+        <dt>中国</dt>
+        <dd>
+            <dt>山东省</dt>
+            <dd>青岛市</dd>
+            <dd>济南市</dd>
+            <dt>辽宁省</dt>
+            <dd>大连市</dd>
+            <dd>沈阳市</dd>
+        </dd>
+        <dt>日本</dt>
+        <dd>
+            <dt>东京</dt>
+            <dd>千叶</dd>
+        </dd>
+    </dl>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17_表单标签</title>
+</head>
+<body>
+    <!-- form input -->
+    <!-- input:单标签，有个type属性，决定表单时什么类型 -->
+    <form action="http://www.baidu.com">
+        <h2>输入框</h2>
+        <input type="text" placeholder="请输入用户名">
+        <h2>密码框</h2>
+        <input type="password" placeholder="请输入密码">
+        <h2>复选框</h2>
+        <input type="checkbox" checked>苹果
+        <input type="checkbox">香蕉
+        <input type="checkbox">葡萄
+        <h2>单选框</h2>
+        <input type="radio" name="gender" id="">男
+        <input type="radio">女
+        <h2>上传文件</h2>
+        <input type="file">
+        <h2>上传文件</h2>
+        <input type="file" multiple>
+        <h2>提交按钮和重置按钮</h2>
+        <input type="submit" name="" id="">
+        <input type="reset" name="" id="">
+        <h2>多行文本框</h2>
+        <textarea cols="30" rows="10"></textarea>
+        <h2>下拉菜单</h2>
+        <select>
+            <option>北京</option>
+            <option selected>上海</option>
+            <option>深圳</option>
+        </select>
+        <select>
+            <option selected>请选择</option>
+            <option>北京</option>
+            <option>上海</option>
+            <option>深圳</option>
+        </select>
+        <select>
+            <option selected disabled>请选择</option>
+            <option>北京</option>
+            <option>上海</option>
+            <option>深圳</option>
+        </select>
+        <select size="2">
+            <option selected disabled>请选择</option>
+            <option>北京</option>
+            <option>上海</option>
+            <option>深圳</option>
+        </select>
+        <select multiple>
+            <option selected disabled>请选择</option>
+            <option>北京</option>
+            <option>上海</option>
+            <option>深圳</option>
+        </select>
+
+        <h2>辅助标签label，让选择的范围变大，提升用户体验</h2>
+        <input type="radio" name="gender" id="man"><label for="man">男</label>
+        <input type="radio" name="gender">女
+    </form>
+</body>
+</html>

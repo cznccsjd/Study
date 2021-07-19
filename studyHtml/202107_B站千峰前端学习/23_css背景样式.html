@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23_css背景样式</title>
+    <style>
+        body{ height: 2000px;}
+        /* background-image  背景图 默认会水平垂直都铺满背景图 */
+        div {width: 70%; height: 700px; background-color: red;
+            background-image: url(../img/weather_cloud.png);
+
+            /* background-repeat 平铺方式 */
+            /* repeat-x  x轴平铺  repeat-y y轴平铺 */
+            /* background-repeat: repeat-x; */
+            /* no-repeat 都不平铺 */
+            background-repeat: no-repeat;
+
+            /* background-position 背景位置  */
+            /* x y : number(px、 %) | 单词 */
+            /* background-position: 100px 200px; */
+            /* x  left center right */
+            /* y  top  center  bottom */
+            /* background-position-x: left;
+            background-position-y: bottom; */
+            /* background-position: center center; */
+
+            /* background-attachment: 背景图随着滚动条移动的方式;  */
+            /*  需要加个滚动条，在style下面加个body */
+            /* scrool，图片位置会动的，上下滑动滚动条时，图片可以拖没了  图片按照当前元素来进行偏移的 */
+            /* fixed, 图片位置固定不动，上下滑动滚动条时，这张图片就在这里  图片按照浏览器来进行偏移的*/
+            background-attachment:fixed ;
+
+        }
+
+        
+        
+    </style>
+</head>
+<body>
+    <div>这是一个块</div>
+</body>
+</html>
