@@ -19,6 +19,7 @@ class myThread(threading.Thread):
 
     def run(self):
         print("开始线程:" + self.name)
+        print(time.ctime(time.time()))
         print_time(self.name, self.counter, 5)
 
 def print_time(threadName, delay, counter):
