@@ -46,9 +46,9 @@ class OneThread():
             print('*********多线程模式运行中：\n')
             Thread(target=self._show_ranking, args=(isbn,)).start()
 
-    @register
-    def _atexit():
-        print("all DONE at:", ctime())
+@register
+def _atexit():
+    print("all DONE at:", ctime())
 
 if __name__ == '__main__':
     # 没有采用多进程方案，其实还是单线程程序

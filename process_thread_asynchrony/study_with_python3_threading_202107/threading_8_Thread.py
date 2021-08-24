@@ -5,7 +5,7 @@
 下面的例子中，先在for循环中，一次调用fib() fac() sum()三个函数，再用多线程的方式调用三个函数，可以直观的比对单线程和多线程的差异
 """
 
-from seven_threading_Thread import MyThread
+from process_thread_asynchrony.study_with_python3_threading_202107.threading_7_Thread import MyThread
 from time import sleep, ctime
 
 # 斐波那契数列
