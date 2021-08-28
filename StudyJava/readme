@@ -1,0 +1,29 @@
+StudyJava为学习java的笔记
+src文件夹，存放的是本次学习的源码；
+HelloWorld.java   初次了解java代码；
+Zhushi.java    了解注释；
+CreateObject.java     创建对象；
+ConstructorWucanGouzao.java    无参构造器；
+ContructorYoucanGouzao.java    有参构造器；
+ConstructorOverLoading.java    构造器重载；
+ShiliBianliangAndChengyuanFangfa.java    练习：实例变量和成员方法；
+Employee.java    EmployeeTest.java     实例：学习import
+PrimitiveTypeTest.java     内置数据类型的位数、包装类、最大/最小长度
+TypeTest.java     内置数据类型的默认值
+Variable.java    变量类型
+InstanceCounter.java    非访问修饰符，static 修饰符
+TestCalculator.java    java运算符计算
+selfAddMinus.java    熟悉自增自减
+TestRelationOpera.java    关系运算符
+TestBitwiseOpera.java    位运算符
+TestLogicOpera.java    逻辑运算符
+TestWhile.java    while循环
+TestDoWhile.java    do...while循环
+TestFor.java    for循环
+TestForPlus.java    java增强for循环
+TestBreak.java    break关键字
+TestContinue.java   continue关键字
+TestIfElseIf.java  if...else if...else语句
+TestSwitchCase.java    switch...case
+TestStringBuffer.java    StringBuffer
+TestArray.java    数组
