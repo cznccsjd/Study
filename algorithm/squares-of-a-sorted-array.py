@@ -3,6 +3,7 @@
 给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
 """
 class Solution(object):
+    # 没有用双指针
     def sortedSquares(self, nums):
         """
         :type nums: List[int]
@@ -23,6 +24,7 @@ class Solution(object):
         list1.sort()
         return list1
 
+    # 用了双指针，但是会进入死循环
     def sortedSquares1(self, nums):
         """
         :type nums: List[int]
@@ -51,6 +53,7 @@ class Solution(object):
 
         return ans
 
+    # 双指针，正常运行
     def sortedSquares2(self, nums):
         n = len(nums)
         ans = [0] * n
