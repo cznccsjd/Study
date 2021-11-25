@@ -9,4 +9,9 @@ first_bad_version.py    第一个错误的版本
 search_insert_position.py    搜索插入位置
 #####     双指针      #####
 squares-of-a-sorted-array.py    有序数组的平方
-algorithm/rotate-array.py    数组翻转
+rotate-array.py    数组翻转
+move-zeroes.py    移动零
+two-sum-ii-input-array-is-sorted.py    两数之和-输入有序数组
+reverse-string.py    反转字符串
+reverse-words-in-a-string-iii.py    反转字符串中的单词 III
+longest-substring-without-repeating-characters.py    无重复字符的最长子串    ♤这个短时间不看就忘了
