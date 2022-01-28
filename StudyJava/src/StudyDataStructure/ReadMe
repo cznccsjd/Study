@@ -1,0 +1,78 @@
+数据结构学习：
+1.1 使用java数组，并开始封装我们自己的数组 https://www.cnblogs.com/wfaceboss/p/10584770.html
+1.2 封装数组之添加元素  https://www.cnblogs.com/wfaceboss/p/10605604.html
+1.3 封装数组之实现现在数组中查询元素和修改元素  https://www.cnblogs.com/wfaceboss/p/10605891.html
+1.4 封装数组之包含、搜索和删除元素    https://www.cnblogs.com/wfaceboss/p/10606719.html
+1.5 改进数组为泛型数组  https://www.cnblogs.com/wfaceboss/p/10614060.html
+1.6 封装数组之动态数组实现  https://www.cnblogs.com/wfaceboss/p/10616492.html
+1.7 针对封装数组的简单复杂度分析  https://www.cnblogs.com/wfaceboss/p/10619316.html
+1.8 摊均复杂度和防止复杂度的震荡  https://www.cnblogs.com/wfaceboss/p/10619785.html
+|
+|ArrayPart
+    |QuickStart.java  快速熟悉数组
+    |Array.java 封装int类型的数组
+    |GenericArray.java  泛型数组
+    |DynamicArray.java  动态数组
+    |TestArrayMain.java  Array的测试方法
+    |TestGenericArray.java  GenericArray的测试方法
+    |TestDynamicArray.java  DynamicArray的测试方法
+    |TestDynamicArrayForLazy.java  降低震荡度的测试方法
+
+2.1 栈的基本实现  https://www.cnblogs.com/wfaceboss/p/10619785.html
+2.2 栈的应用题：括号匹配  https://www.cnblogs.com/wfaceboss/p/10625620.html
+3.6 基于链表实现栈     https://www.cnblogs.com/wfaceboss/p/10643690.html
+|
+|StackPart
+    |Stack.java  栈接口
+    |ArrayStack.java   ArrayStack类实现接口
+    |TestStackMain.java  测试用例
+    |TestForLeetCodeYouXiaoDeKuoHao.java   leetcode括号匹配题
+    |LinkedListStack.java       基于链表实现栈
+
+2.4 数组队列  https://www.cnblogs.com/wfaceboss/p/10627316.html
+2.5 循环队列  https://www.cnblogs.com/wfaceboss/p/10628345.html
+3.7 基于链表实现队列    https://www.cnblogs.com/wfaceboss/p/10646770.html
+|
+|QueuePart
+    |Queue.java 队列接口
+    |ArrayQueue.java    队列实现
+    |TestQueueMain.java 测试方法
+    |LoopQueue.java     循环队列
+    |LinkedListQueue.java       基于链表实现队列
+
+3.1 链表--链表（Linked List）入门    https://www.cnblogs.com/wfaceboss/p/10631649.html
+3.2 在链表中添加元素    https://www.cnblogs.com/wfaceboss/p/10634880.html
+3.3 链表中添加元素，使用虚拟头   https://www.cnblogs.com/wfaceboss/p/10640678.html
+3.4 链表中元素的获取、查询和修改      https://www.cnblogs.com/wfaceboss/p/10641830.html
+3.5 链表中元素删除     https://www.cnblogs.com/wfaceboss/p/10642754.html
+|
+|LinkedListPart
+    |LinkedList.java    初步了解链表
+    |LinkedListWithDummyHead.java       使用虚拟头
+
+4.1 递归基础与递归的宏观语意    https://www.cnblogs.com/wfaceboss/p/10656128.html
+4.2 链表的天然递归结构性质     https://www.cnblogs.com/wfaceboss/p/10659399.html
+4.3 递归运行机制：递归的围观解读    https://www.cnblogs.com/wfaceboss/p/10667325.html
+|
+|RecursionPart
+    |SumArrayJlz.java 递归学习入门方法
+    |Solution3.java 这是案例，没搞明白，代码暂时作废
+
+5.1 二叉搜索树基础： https://www.cnblogs.com/wfaceboss/p/10672282.html
+5.2 二叉搜索树遍历（前序、中序、后序、层次、广度优先遍历） https://www.cnblogs.com/wfaceboss/p/10678988.html
+5.3 删除二叉搜索树的最大元素和最小元素 https://www.cnblogs.com/wfaceboss/p/10687550.html
+5.4 删除二叉搜索树的任意元素  https://www.cnblogs.com/wfaceboss/p/10694736.html
+|
+|BSTPart
+    |BST.java   二叉搜索树基础，搜索遍历，删除等功能
+    |TestBSTMain.java  二叉树测试用例
+
+6.1 集合和映射--集合Set->底层基于二叉搜索树实现 https://www.cnblogs.com/wfaceboss/p/10706876.html
+6.2 集合和映射--集合Set->底层基于链表实现 https://www.cnblogs.com/wfaceboss/p/10716433.html
+PS：集合的部分，其实没有完全看明白，还需要再看
+|
+|SetPart
+    |Set.java Set接口定义
+    |BSTSet.java 基于二分搜索树实现集合
+    |FileOperation.java 测试用例用到的，读取文件中的单词
+    |TestBSTSetMain.java 测试用例
