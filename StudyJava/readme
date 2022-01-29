@@ -1,33 +1,38 @@
-StudyJava为学习java的笔记
-src文件夹，存放的是本次学习的源码；
-src/Algorithm文件夹，leetcode刷题中，用java写的部分
-    src/Algorithm/RotateArray.java
-    src/Algorithm/ReverseWordsInAStringIII.java     反转字符串中的单词 III
-HelloWorld.java   初次了解java代码；
-Zhushi.java    了解注释；
-CreateObject.java     创建对象；
-ConstructorWucanGouzao.java    无参构造器；
-ContructorYoucanGouzao.java    有参构造器；
-ConstructorOverLoading.java    构造器重载；
-ShiliBianliangAndChengyuanFangfa.java    练习：实例变量和成员方法；
-Employee.java    EmployeeTest.java     实例：学习import
-PrimitiveTypeTest.java     内置数据类型的位数、包装类、最大/最小长度
-TypeTest.java     内置数据类型的默认值
-Variable.java    变量类型
-InstanceCounter.java    非访问修饰符，static 修饰符
-TestCalculator.java    java运算符计算
-selfAddMinus.java    熟悉自增自减
-TestRelationOpera.java    关系运算符
-TestBitwiseOpera.java    位运算符
-TestLogicOpera.java    逻辑运算符
-TestWhile.java    while循环
-TestDoWhile.java    do...while循环
-TestFor.java    for循环
-TestForPlus.java    java增强for循环
-TestBreak.java    break关键字
-TestContinue.java   continue关键字
-TestIfElseIf.java  if...else if...else语句
-TestSwitchCase.java    switch...case
-TestStringBuffer.java    StringBuffer
-TestArray.java    数组
-StudyListNode.java    链表
+StudyJava为学习java的笔记：
+|
+|src    学习的源码
+    |Algorithm      leetcode上刷题时涉及java的代码
+        |ReverseWordsInAStringIII.java     反转字符串中的单词 III
+        |RotateArray.java   双指针
+        |StudyDigui.java    知乎上学习递归，思路挺不错的，后面还需要多次复习*****
+    |Bilibili2111   哔哩哔哩上学习的java入门视频，虽说粗糙了点，但是覆盖了主要的知识点，推荐
+    |StudyDataStructure     cnblogs上跟着博主学习的数据结构，还差最后的集合部分没有学透
+
+    |HelloWorld.java   初次了解java代码；
+    |Zhushi.java    了解注释；
+    |CreateObject.java     创建对象；
+    |ConstructorWucanGouzao.java    无参构造器；
+    |ContructorYoucanGouzao.java    有参构造器；
+    |ConstructorOverLoading.java    构造器重载；
+    |ShiliBianliangAndChengyuanFangfa.java    练习：实例变量和成员方法；
+    |Employee.java    EmployeeTest.java     实例：学习import
+    |PrimitiveTypeTest.java     内置数据类型的位数、包装类、最大/最小长度
+    |TypeTest.java     内置数据类型的默认值
+    |Variable.java    变量类型
+    |InstanceCounter.java    非访问修饰符，static 修饰符
+    |TestCalculator.java    java运算符计算
+    |selfAddMinus.java    熟悉自增自减
+    |TestRelationOpera.java    关系运算符
+    |TestBitwiseOpera.java    位运算符
+    |TestLogicOpera.java    逻辑运算符
+    |TestWhile.java    while循环
+    |TestDoWhile.java    do...while循环
+    |TestFor.java    for循环
+    |TestForPlus.java    java增强for循环
+    |TestBreak.java    break关键字
+    |TestContinue.java   continue关键字
+    |TestIfElseIf.java  if...else if...else语句
+    |TestSwitchCase.java    switch...case
+    |TestStringBuffer.java    StringBuffer
+    |TestArray.java    数组
+    |StudyListNode.java    链表
