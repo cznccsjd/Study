@@ -1,0 +1,11 @@
+学习文档路径：https://interviewguide.cn/#/Doc/Knowledge/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F
+|
+|algorithm
+    |StudyWithAxiu
+        |Basic
+            |bubble_sort.py    冒泡排序
+            |insertion_sort.py    插入排序
+            |merge_sort.py    归并排序
+            |quick_sort.py    快速排序
+            |selection_sort.py  选择排序
+            |shell_sort.py    希尔排序

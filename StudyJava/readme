@@ -2,8 +2,11 @@ StudyJava为学习java的笔记：
 |
 |src    学习的源码
     |Algorithm      leetcode上刷题时涉及java的代码
+        |MergeSort.java    归并排序
+        |RadomList.java    随机生成数列
         |ReverseWordsInAStringIII.java     反转字符串中的单词 III
         |RotateArray.java   双指针
+        |ShellSort.java    希尔排序
         |StudyDigui.java    知乎上学习递归，思路挺不错的，后面还需要多次复习*****
     |Bilibili2111   哔哩哔哩上学习的java入门视频，虽说粗糙了点，但是覆盖了主要的知识点，推荐
     |StudyDataStructure     cnblogs上跟着博主学习的数据结构，还差最后的集合部分没有学透
