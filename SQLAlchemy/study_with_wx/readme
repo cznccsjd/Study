@@ -1,0 +1,11 @@
+学习链接：https://mp.weixin.qq.com/s/zuxckrGmPDM7Oz44Mpr7Uw
+
+one_createDB.py   创建ORM模型
+two_insert_data.py    插入/批量插入数据
+three_query_data.py    查询数据
+four_model.py    自动同步数据库生成model文件
+five_relation.py    表一对一关系
+five_one.py     表一对一关系示例
+five_two.py     表一对一关系，添加数据
+five_three.py   表一对一关系，查询数据
+six_relationship.py     relationship使用
