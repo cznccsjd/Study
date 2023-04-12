@@ -1,0 +1,7 @@
+学习logging模块
+学习链接：
+https://docs.python.org/zh-cn/3.9/howto/logging.html
+
+log_to_file.py  记录日志到文件
+logging_from_multi_modules.py    从多个模块记录日志
+logging_parms.py    记录变量数据、更改显示消息格式、在消息中显示日期/时间

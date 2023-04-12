@@ -1,0 +1,11 @@
+INFO:root:Started
+INFO:root:Finished
+INFO:root:Started
+INFO:root:Doing something
+INFO:root:Finished
+WARNING:root:Lock before you leap!
+DEBUG:This message should appear on the console
+INFO:So should this
+WARNING:And this, too
+2023-04-12 14:18:02,188 is when this event was logged.
+04/12/2023 02:20:12 PM is when this event was logged.
